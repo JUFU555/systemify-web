@@ -4,6 +4,9 @@
 
 AI Agent Deployment • Web Design • App Development
 
+🔗 **Repo:** https://github.com/JUFU555/systemify-web  
+🚀 **Deploy:** Ready for Vercel
+
 ---
 
 ## Project Structure
