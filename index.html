@@ -183,8 +183,9 @@
       right: -10%;
       width: 600px;
       height: 600px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
       border-radius: 50%;
+      will-change: transform;
       animation: float 20s ease-in-out infinite;
     }
     
@@ -195,14 +196,15 @@
       left: -5%;
       width: 400px;
       height: 400px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
       border-radius: 50%;
+      will-change: transform;
       animation: float 15s ease-in-out infinite reverse;
     }
     
     @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(0, -20px, 0) rotate(5deg); }
     }
     
     .hero-content {
@@ -327,12 +329,13 @@
       width: 200%;
       height: 200%;
       background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      will-change: transform, opacity;
       animation: pulse 4s ease-in-out infinite;
     }
     
     @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.1); opacity: 0.8; }
+      0%, 100% { transform: scale3d(1, 1, 1); opacity: 0.5; }
+      50% { transform: scale3d(1.1, 1.1, 1); opacity: 0.8; }
     }
     
     .what-is-visual .icon {
@@ -1046,14 +1049,7 @@
       }, 1000);
     });
 
-    // Parallax effect for hero
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const hero = document.querySelector('.hero');
-      if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-      }
-    });
+    // Removed parallax effect - caused stutter on mobile
 
     // Add micro-interactions to capability cards
     document.querySelectorAll('.capability-card').forEach(card => {
