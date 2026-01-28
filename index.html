@@ -114,6 +114,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 32px;
     }
     
     .logo {
@@ -129,6 +130,30 @@
     
     .logo:hover {
       transform: scale(1.05);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      margin-left: auto;
+      margin-right: 24px;
+    }
+    
+    .nav-links a {
+      color: var(--gray-700);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--orange);
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
     }
     
     .cta-button {
@@ -696,7 +721,12 @@
         <a href="/" class="logo">
           <span>systemify</span>
         </a>
-        <a href="#contact" class="cta-button">Get Started</a>
+        <nav class="nav-links">
+          <a href="/">Home</a>
+          <a href="/compare.html">Compare</a>
+          <a href="/order.html">Order</a>
+        </nav>
+        <a href="/order.html" class="cta-button">Get Started</a>
       </div>
     </div>
   </header>
@@ -708,8 +738,8 @@
         <h1>AI Agent Deployment</h1>
         <p>Custom AI assistants powered by Claude that handle operations 24/7.<br>Built for business owners, creators, and teams who need intelligent automation.</p>
         <div class="hero-cta">
-          <a href="#contact" class="button-primary">Book a Demo</a>
-          <a href="#capabilities" class="button-secondary">See Capabilities</a>
+          <a href="/order.html" class="button-primary">Get Started</a>
+          <a href="/compare.html" class="button-secondary">Compare vs ChatGPT</a>
         </div>
       </div>
     </div>
