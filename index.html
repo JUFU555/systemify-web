@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Systemify - Your Business, Systemized</title>
-  <meta name="description" content="AI Agent Deployment, Web Design, and App Development. We systemize your business so you can focus on what matters.">
+  <title>Systemify - AI Agent Deployment</title>
+  <meta name="description" content="Deploy custom AI assistants powered by Claude. 24/7 automation, proactive workflows, and intelligent business operations.">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Systemify - Your Business, Systemized">
-  <meta property="og:description" content="AI Agent Deployment, Web Design, and App Development">
+  <meta property="og:title" content="Systemify - AI Agent Deployment">
+  <meta property="og:description" content="Deploy custom AI assistants powered by Claude. 24/7 automation and intelligent operations.">
   <meta property="og:image" content="/branding/logo-white-on-orange.jpg">
   
   <style>
@@ -34,6 +34,7 @@
       line-height: 1.6;
       color: var(--gray-900);
       background: white;
+      overflow-x: hidden;
     }
     
     .container {
@@ -42,10 +43,71 @@
       padding: 0 24px;
     }
     
+    /* Scroll Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .slide-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .slide-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .scale-in {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .stagger-delay-1 { transition-delay: 0.1s; }
+    .stagger-delay-2 { transition-delay: 0.2s; }
+    .stagger-delay-3 { transition-delay: 0.3s; }
+    .stagger-delay-4 { transition-delay: 0.4s; }
+    .stagger-delay-5 { transition-delay: 0.5s; }
+    .stagger-delay-6 { transition-delay: 0.6s; }
+    
     /* Header */
     header {
       padding: 24px 0;
       border-bottom: 1px solid var(--gray-100);
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: box-shadow 0.3s;
+    }
+    
+    header.scrolled {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
     
     .header-content {
@@ -62,10 +124,11 @@
       font-weight: 700;
       color: var(--orange);
       text-decoration: none;
+      transition: transform 0.3s;
     }
     
-    .logo img {
-      height: 40px;
+    .logo:hover {
+      transform: scale(1.05);
     }
     
     .cta-button {
@@ -75,11 +138,32 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
-      transition: background 0.2s;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .cta-button:hover::before {
+      width: 300px;
+      height: 300px;
     }
     
     .cta-button:hover {
-      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255,107,26,0.3);
     }
     
     /* Hero */
@@ -88,6 +172,42 @@
       color: white;
       padding: 120px 0 80px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      animation: float 15s ease-in-out infinite reverse;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
     
     .hero h1 {
@@ -95,6 +215,18 @@
       font-weight: 800;
       margin-bottom: 24px;
       line-height: 1.2;
+      animation: slideDown 0.8s ease;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     .hero p {
@@ -102,11 +234,18 @@
       max-width: 600px;
       margin: 0 auto 40px;
       opacity: 0.95;
+      animation: fadeIn 1s ease 0.3s both;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 0.95; }
     }
     
     .hero-cta {
       display: inline-flex;
       gap: 16px;
+      animation: fadeIn 1s ease 0.6s both;
     }
     
     .button-primary {
@@ -117,11 +256,12 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 18px;
-      transition: transform 0.2s;
+      transition: all 0.3s;
     }
     
     .button-primary:hover {
       transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255,255,255,0.3);
     }
     
     .button-secondary {
@@ -133,11 +273,87 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 18px;
+      transition: all 0.3s;
     }
     
-    /* Services */
-    .services {
-      padding: 80px 0;
+    .button-secondary:hover {
+      background: white;
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
+    
+    /* What is Systemify */
+    .what-is {
+      padding: 100px 0;
+      background: white;
+    }
+    
+    .what-is-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .what-is-text h2 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: var(--gray-900);
+    }
+    
+    .what-is-text p {
+      font-size: 18px;
+      color: var(--gray-600);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+    
+    .what-is-visual {
+      background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange) 100%);
+      border-radius: 20px;
+      padding: 60px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .what-is-visual::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+    
+    .what-is-visual .icon {
+      font-size: 120px;
+      margin-bottom: 20px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .what-is-visual h3 {
+      font-size: 28px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Capabilities */
+    .capabilities {
+      padding: 100px 0;
+      background: var(--gray-50);
     }
     
     .section-header {
@@ -158,83 +374,149 @@
       margin: 0 auto;
     }
     
-    .services-grid {
+    .capabilities-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 32px;
     }
     
-    .service-card {
-      background: var(--gray-50);
+    .capability-card {
+      background: white;
       padding: 40px;
-      border-radius: 12px;
+      border-radius: 16px;
       border: 2px solid var(--gray-100);
-      transition: all 0.3s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
     
-    .service-card:hover {
+    .capability-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,107,26,0.05), transparent);
+      transition: left 0.5s;
+    }
+    
+    .capability-card:hover::before {
+      left: 100%;
+    }
+    
+    .capability-card:hover {
       border-color: var(--orange);
-      transform: translateY(-4px);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255,107,26,0.15);
     }
     
-    .service-icon {
+    .capability-icon {
       font-size: 48px;
       margin-bottom: 16px;
+      display: block;
+      transition: transform 0.3s;
     }
     
-    .service-card h3 {
+    .capability-card:hover .capability-icon {
+      transform: scale(1.2) rotate(5deg);
+    }
+    
+    .capability-card h3 {
       font-size: 24px;
       margin-bottom: 12px;
       color: var(--gray-900);
     }
     
-    .service-card p {
+    .capability-card p {
       color: var(--gray-600);
-      margin-bottom: 20px;
+      line-height: 1.7;
     }
     
-    .service-features {
+    .capability-features {
       list-style: none;
-      margin-bottom: 24px;
+      margin-top: 20px;
     }
     
-    .service-features li {
+    .capability-features li {
       padding: 8px 0;
       color: var(--gray-700);
+      transition: transform 0.2s;
     }
     
-    .service-features li:before {
-      content: "✓";
+    .capability-features li:hover {
+      transform: translateX(5px);
+    }
+    
+    .capability-features li:before {
+      content: "⚡";
       color: var(--orange);
       font-weight: bold;
       margin-right: 12px;
     }
     
+    /* Stats Section */
+    .stats {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+      color: white;
+      text-align: center;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+    
+    .stat-card {
+      padding: 20px;
+    }
+    
+    .stat-number {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+    
     /* Pricing */
     .pricing {
-      background: var(--gray-50);
-      padding: 80px 0;
+      padding: 100px 0;
+      background: white;
     }
     
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
       margin-top: 48px;
     }
     
     .pricing-card {
       background: white;
-      padding: 40px;
-      border-radius: 12px;
+      padding: 48px;
+      border-radius: 16px;
       border: 2px solid var(--gray-100);
       text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.12);
     }
     
     .pricing-card.featured {
       border-color: var(--orange);
-      position: relative;
-      transform: scale(1.05);
+      background: linear-gradient(to bottom, white, var(--gray-50));
     }
     
     .pricing-badge {
@@ -248,18 +530,21 @@
       border-radius: 20px;
       font-size: 14px;
       font-weight: 600;
+      box-shadow: 0 4px 12px rgba(255,107,26,0.3);
     }
     
     .pricing-card h3 {
-      font-size: 24px;
+      font-size: 28px;
       margin-bottom: 8px;
+      font-weight: 700;
     }
     
     .pricing-price {
-      font-size: 48px;
+      font-size: 56px;
       font-weight: 800;
       color: var(--orange);
-      margin: 16px 0;
+      margin: 20px 0;
+      line-height: 1;
     }
     
     .pricing-price span {
@@ -267,9 +552,15 @@
       color: var(--gray-600);
     }
     
+    .pricing-card .cta-button {
+      margin-top: 24px;
+      display: inline-block;
+    }
+    
     /* Contact */
     .contact {
-      padding: 80px 0;
+      padding: 100px 0;
+      background: var(--gray-50);
       text-align: center;
     }
     
@@ -294,11 +585,12 @@
     .form-group textarea,
     .form-group select {
       width: 100%;
-      padding: 12px 16px;
+      padding: 14px 18px;
       border: 2px solid var(--gray-100);
       border-radius: 8px;
       font-size: 16px;
       font-family: inherit;
+      transition: all 0.3s;
     }
     
     .form-group input:focus,
@@ -306,6 +598,8 @@
     .form-group select:focus {
       outline: none;
       border-color: var(--orange);
+      box-shadow: 0 0 0 4px rgba(255,107,26,0.1);
+      transform: translateY(-2px);
     }
     
     .form-submit {
@@ -318,11 +612,32 @@
       font-size: 18px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .form-submit::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .form-submit:hover::before {
+      width: 400px;
+      height: 400px;
     }
     
     .form-submit:hover {
-      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,107,26,0.4);
     }
     
     /* Footer */
@@ -333,6 +648,11 @@
       text-align: center;
     }
     
+    footer p {
+      opacity: 0.8;
+    }
+    
+    /* Responsive */
     @media (max-width: 768px) {
       .hero h1 {
         font-size: 36px;
@@ -342,15 +662,32 @@
         font-size: 32px;
       }
       
-      .pricing-card.featured {
-        transform: none;
+      .what-is-content {
+        grid-template-columns: 1fr;
       }
+      
+      .stats-grid,
+      .capabilities-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .pricing-card:hover {
+        transform: translateY(-8px);
+      }
+    }
+    
+    /* Parallax */
+    .parallax-section {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
     }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header id="header">
     <div class="container">
       <div class="header-content">
         <a href="/" class="logo">
@@ -363,61 +700,172 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="container">
-      <h1>Your Business, Systemized</h1>
-      <p>AI Agent Deployment • Web Design • App Development<br>We build the systems, you focus on growth.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="button-primary">Book a Demo</a>
-        <a href="#services" class="button-secondary">Learn More</a>
+    <div class="hero-content">
+      <div class="container">
+        <h1>AI Agent Deployment</h1>
+        <p>Custom AI assistants powered by Claude that handle operations 24/7.<br>Built for business owners, creators, and teams who need intelligent automation.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="button-primary">Book a Demo</a>
+          <a href="#capabilities" class="button-secondary">See Capabilities</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section id="services" class="services">
+  <!-- What is Systemify -->
+  <section class="what-is">
     <div class="container">
-      <div class="section-header">
-        <h2>What We Build</h2>
-        <p>End-to-end solutions that transform how your business operates</p>
+      <div class="what-is-content">
+        <div class="what-is-text fade-in">
+          <h2>What is Systemify?</h2>
+          <p><strong>Your AI agent, deployed and running 24/7.</strong></p>
+          <p>We build custom AI assistants using Clawdbot (powered by Claude) that integrate with your tools, automate your workflows, and handle operations while you sleep.</p>
+          <p>Think Jarvis from Iron Man. A sharp, efficient assistant that manages your calendar, monitors your business, handles communications, and builds automations proactively.</p>
+          <p><strong>You focus on growth. Your AI handles the rest.</strong></p>
+        </div>
+        <div class="what-is-visual fade-in">
+          <span class="icon">🤖⚡</span>
+          <h3>Intelligent. Proactive. Always On.</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="container">
+      <h2 class="fade-in">Built for Performance</h2>
+      <div class="stats-grid">
+        <div class="stat-card scale-in stagger-delay-1">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Always Available</span>
+        </div>
+        <div class="stat-card scale-in stagger-delay-2">
+          <span class="stat-number">10+</span>
+          <span class="stat-label">Integrations</span>
+        </div>
+        <div class="stat-card scale-in stagger-delay-3">
+          <span class="stat-number">∞</span>
+          <span class="stat-label">Automation Potential</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section id="capabilities" class="capabilities">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>What Your AI Agent Can Do</h2>
+        <p>Powerful capabilities that transform how you work</p>
       </div>
       
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">🤖</div>
-          <h3>AI Agent Deployment</h3>
-          <p>Custom AI assistants powered by Claude that handle operations 24/7</p>
-          <ul class="service-features">
-            <li>Personal assistant setup</li>
-            <li>Calendar & email management</li>
-            <li>Custom integrations</li>
-            <li>24/7 availability</li>
-            <li>WhatsApp/Telegram/Discord</li>
+      <div class="capabilities-grid">
+        <div class="capability-card slide-in-left stagger-delay-1">
+          <span class="capability-icon">📅</span>
+          <h3>Calendar & Scheduling</h3>
+          <p>Sync with Notion databases, manage events, send reminders, and keep you organized.</p>
+          <ul class="capability-features">
+            <li>Daily briefings (morning & evening)</li>
+            <li>Smart reminders (30min, 15min, now)</li>
+            <li>Event tracking & updates</li>
+            <li>Task status monitoring</li>
           </ul>
         </div>
         
-        <div class="service-card">
-          <div class="service-icon">🎨</div>
-          <h3>Web Design</h3>
-          <p>Modern, responsive websites that convert visitors into customers</p>
-          <ul class="service-features">
-            <li>Custom design & branding</li>
-            <li>Mobile-first approach</li>
-            <li>SEO optimized</li>
-            <li>Fast loading speeds</li>
-            <li>CMS integration</li>
+        <div class="capability-card slide-in-left stagger-delay-2">
+          <span class="capability-icon">💬</span>
+          <h3>Multi-Channel Communication</h3>
+          <p>Respond across WhatsApp, Discord, Telegram, Signal, and more.</p>
+          <ul class="capability-features">
+            <li>WhatsApp integration</li>
+            <li>Discord community management</li>
+            <li>Telegram bot deployment</li>
+            <li>Smart message routing</li>
           </ul>
         </div>
         
-        <div class="service-card">
-          <div class="service-icon">📱</div>
-          <h3>App Development</h3>
-          <p>Full-stack applications with AI integration and automation</p>
-          <ul class="service-features">
-            <li>Web & mobile apps</li>
-            <li>API development</li>
-            <li>Database design</li>
-            <li>Cloud deployment</li>
-            <li>Ongoing support</li>
+        <div class="capability-card slide-in-left stagger-delay-3">
+          <span class="capability-icon">🔍</span>
+          <h3>Web Research & Monitoring</h3>
+          <p>Search the web, fetch content, monitor social media, and stay informed.</p>
+          <ul class="capability-features">
+            <li>Real-time web search</li>
+            <li>Content extraction</li>
+            <li>Twitter/X monitoring</li>
+            <li>News tracking</li>
+          </ul>
+        </div>
+        
+        <div class="capability-card slide-in-right stagger-delay-1">
+          <span class="capability-icon">🛠️</span>
+          <h3>Workflow Automation</h3>
+          <p>Build tools, create scripts, and automate repetitive tasks proactively.</p>
+          <ul class="capability-features">
+            <li>Custom script generation</li>
+            <li>API integrations</li>
+            <li>Database operations</li>
+            <li>File management</li>
+          </ul>
+        </div>
+        
+        <div class="capability-card slide-in-right stagger-delay-2">
+          <span class="capability-icon">🎨</span>
+          <h3>Creative Generation</h3>
+          <p>Generate images, videos, music, and more via Kie.ai integration.</p>
+          <ul class="capability-features">
+            <li>Image generation (DALL-E, Flux)</li>
+            <li>Video creation (Kling, Runway)</li>
+            <li>Music production (Suno V5)</li>
+            <li>Voice synthesis (ElevenLabs)</li>
+          </ul>
+        </div>
+        
+        <div class="capability-card slide-in-right stagger-delay-3">
+          <span class="capability-icon">🧠</span>
+          <h3>Memory & Context</h3>
+          <p>Persistent memory system that learns and remembers what matters.</p>
+          <ul class="capability-features">
+            <li>Long-term memory (MEMORY.md)</li>
+            <li>Daily logs & context</li>
+            <li>Semantic search</li>
+            <li>Learning from interactions</li>
+          </ul>
+        </div>
+        
+        <div class="capability-card scale-in stagger-delay-1">
+          <span class="capability-icon">🌐</span>
+          <h3>Browser Control</h3>
+          <p>Control browsers, automate web tasks, and scrape data programmatically.</p>
+          <ul class="capability-features">
+            <li>Chrome extension relay</li>
+            <li>Headless automation</li>
+            <li>Form filling & navigation</li>
+            <li>Screenshot capture</li>
+          </ul>
+        </div>
+        
+        <div class="capability-card scale-in stagger-delay-2">
+          <span class="capability-icon">📱</span>
+          <h3>Device Integration</h3>
+          <p>Connect with your devices for cameras, notifications, and location.</p>
+          <ul class="capability-features">
+            <li>Camera snapshots</li>
+            <li>Push notifications</li>
+            <li>Location tracking</li>
+            <li>Screen recording</li>
+          </ul>
+        </div>
+        
+        <div class="capability-card scale-in stagger-delay-3">
+          <span class="capability-icon">⏰</span>
+          <h3>Proactive Heartbeats</h3>
+          <p>Background checks, monitoring, and proactive alerts without being asked.</p>
+          <ul class="capability-features">
+            <li>Email monitoring</li>
+            <li>Calendar scanning</li>
+            <li>Weather updates</li>
+            <li>Smart check-ins</li>
           </ul>
         </div>
       </div>
@@ -427,50 +875,53 @@
   <!-- Pricing -->
   <section id="pricing" class="pricing">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <h2>Simple, Transparent Pricing</h2>
         <p>Choose the plan that fits your needs. Scale up anytime.</p>
       </div>
       
       <div class="pricing-grid">
-        <div class="pricing-card">
+        <div class="pricing-card scale-in stagger-delay-1">
           <h3>Starter</h3>
           <div class="pricing-price">$1,500<span>/setup</span></div>
-          <p>+ $300/month</p>
-          <ul class="service-features">
+          <p style="margin-bottom: 20px; color: var(--gray-600);">+ $300/month</p>
+          <ul class="capability-features" style="text-align: left;">
             <li>Basic AI agent setup</li>
             <li>WhatsApp integration</li>
             <li>Calendar management</li>
             <li>Email support</li>
+            <li>3 integrations</li>
           </ul>
           <a href="#contact" class="cta-button">Get Started</a>
         </div>
         
-        <div class="pricing-card featured">
+        <div class="pricing-card featured scale-in stagger-delay-2">
           <div class="pricing-badge">Most Popular</div>
           <h3>Professional</h3>
           <div class="pricing-price">$3,500<span>/setup</span></div>
-          <p>+ $500/month</p>
-          <ul class="service-features">
+          <p style="margin-bottom: 20px; color: var(--gray-600);">+ $500/month</p>
+          <ul class="capability-features" style="text-align: left;">
             <li>Full AI agent deployment</li>
-            <li>Custom integrations</li>
+            <li>Custom integrations (10+)</li>
             <li>Multi-channel support</li>
             <li>Priority support</li>
             <li>Custom workflows</li>
+            <li>Proactive automation</li>
           </ul>
           <a href="#contact" class="cta-button">Get Started</a>
         </div>
         
-        <div class="pricing-card">
+        <div class="pricing-card scale-in stagger-delay-3">
           <h3>Enterprise</h3>
           <div class="pricing-price">Custom</div>
-          <p>Let's talk</p>
-          <ul class="service-features">
-            <li>AI agent + web/app build</li>
-            <li>White-label options</li>
-            <li>Dedicated support</li>
-            <li>Custom SLAs</li>
-            <li>Enterprise features</li>
+          <p style="margin-bottom: 20px; color: var(--gray-600);">Let's talk</p>
+          <ul class="capability-features" style="text-align: left;">
+            <li>White-label deployment</li>
+            <li>Dedicated infrastructure</li>
+            <li>Custom development</li>
+            <li>SLA guarantees</li>
+            <li>Team training</li>
+            <li>Ongoing consulting</li>
           </ul>
           <a href="#contact" class="cta-button">Contact Us</a>
         </div>
@@ -481,12 +932,12 @@
   <!-- Contact -->
   <section id="contact" class="contact">
     <div class="container">
-      <div class="section-header">
-        <h2>Let's Build Together</h2>
-        <p>Tell us about your project and we'll get back to you within 24 hours</p>
+      <div class="section-header fade-in">
+        <h2>Let's Deploy Your AI Agent</h2>
+        <p>Tell us about your needs and we'll get back to you within 24 hours</p>
       </div>
       
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form fade-in" id="contactForm">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required>
@@ -498,18 +949,22 @@
         </div>
         
         <div class="form-group">
-          <label for="service">Interested In</label>
-          <select id="service" name="service" required>
-            <option value="">Select a service</option>
-            <option value="ai-agent">AI Agent Deployment</option>
-            <option value="web-design">Web Design</option>
-            <option value="app-dev">App Development</option>
-            <option value="multiple">Multiple Services</option>
+          <label for="company">Company (optional)</label>
+          <input type="text" id="company" name="company">
+        </div>
+        
+        <div class="form-group">
+          <label for="plan">Interested In</label>
+          <select id="plan" name="plan" required>
+            <option value="">Select a plan</option>
+            <option value="starter">Starter ($1,500 + $300/mo)</option>
+            <option value="professional">Professional ($3,500 + $500/mo)</option>
+            <option value="enterprise">Enterprise (Custom)</option>
           </select>
         </div>
         
         <div class="form-group">
-          <label for="message">Tell us about your project</label>
+          <label for="message">What do you need automated?</label>
           <textarea id="message" name="message" rows="5" required></textarea>
         </div>
         
@@ -526,28 +981,88 @@
   </footer>
 
   <script>
+    // Sticky header on scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+      observer.observe(el);
+    });
+
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
+          target.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
       });
     });
 
-    // Form submission (placeholder - will connect to backend)
+    // Form submission
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const formData = new FormData(e.target);
       const data = Object.fromEntries(formData);
       
+      const submitButton = e.target.querySelector('.form-submit');
+      submitButton.textContent = 'Sending...';
+      submitButton.disabled = true;
+      
       // TODO: Connect to backend/Notion
       console.log('Form submitted:', data);
-      alert('Thanks! We\'ll be in touch within 24 hours.');
-      e.target.reset();
+      
+      setTimeout(() => {
+        alert('Thanks! We\'ll be in touch within 24 hours. ⚡');
+        e.target.reset();
+        submitButton.textContent = 'Send Message';
+        submitButton.disabled = false;
+      }, 1000);
+    });
+
+    // Parallax effect for hero
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
+
+    // Add micro-interactions to capability cards
+    document.querySelectorAll('.capability-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.zIndex = '10';
+      });
+      card.addEventListener('mouseleave', function() {
+        this.style.zIndex = '1';
+      });
     });
   </script>
 </body>
