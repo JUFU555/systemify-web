@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT vs Systemify - Why Founders Are Switching</title>
+  <meta name="description" content="Compare ChatGPT vs Systemify. See why busy founders are switching to AI that works for them, not just responds to them.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="ChatGPT vs Systemify - The Complete Comparison">
+  <meta property="og:description" content="ChatGPT is a tool you use. Systemify is an assistant that works for you.">
+  <meta property="og:image" content="/branding/logo-white-on-orange.jpg">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --orange: #FF6B1A;
+      --orange-dark: #E65A0D;
+      --orange-light: #FF8542;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-600: #4B5563;
+      --green: #10B981;
+      --red: #EF4444;
+      --yellow: #F59E0B;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--gray-900);
+      background: white;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--gray-100);
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+    
+    .nav-links a {
+      color: var(--gray-700);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--orange);
+    }
+    
+    .cta-button {
+      background: var(--orange);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255,107,26,0.3);
+    }
+    
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+      color: white;
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 32px;
+      opacity: 0.95;
+    }
+    
+    .hero-tagline {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--gray-600);
+      margin-bottom: 48px;
+      text-align: center;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Comparison Table */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 48px 0;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .comparison-table thead {
+      background: var(--gray-900);
+      color: white;
+    }
+    
+    .comparison-table th {
+      padding: 20px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    
+    .comparison-table th:first-child {
+      width: 40%;
+    }
+    
+    .comparison-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    
+    .comparison-table tbody tr:hover {
+      background: var(--gray-50);
+    }
+    
+    .check-yes { color: var(--green); font-weight: 700; font-size: 18px; }
+    .check-no { color: var(--red); font-weight: 700; font-size: 18px; }
+    .check-partial { color: var(--yellow); font-weight: 700; font-size: 18px; }
+    
+    /* Feature Blocks */
+    .feature-blocks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 64px 0;
+    }
+    
+    .feature-block {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      border: 2px solid var(--gray-100);
+      transition: all 0.3s;
+    }
+    
+    .feature-block:hover {
+      border-color: var(--orange);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(255,107,26,0.15);
+    }
+    
+    .feature-block h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--gray-900);
+    }
+    
+    .feature-block h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: var(--gray-700);
+    }
+    
+    .feature-block p {
+      color: var(--gray-600);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    
+    .feature-block ul {
+      list-style: none;
+      margin-top: 16px;
+    }
+    
+    .feature-block li {
+      padding: 8px 0;
+      color: var(--gray-700);
+    }
+    
+    .feature-block li:before {
+      content: "⚡";
+      margin-right: 12px;
+      color: var(--orange);
+    }
+    
+    /* ROI Section */
+    .roi-section {
+      background: var(--gray-50);
+      padding: 80px 0;
+      text-align: center;
+    }
+    
+    .roi-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+    
+    .roi-card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    
+    .roi-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .roi-number {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--orange);
+      display: block;
+      margin: 16px 0;
+    }
+    
+    .roi-label {
+      font-size: 16px;
+      color: var(--gray-600);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+      color: white;
+      text-align: center;
+    }
+    
+    .cta-section h2 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+    
+    .cta-section p {
+      font-size: 20px;
+      margin-bottom: 40px;
+      opacity: 0.95;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    
+    .button-primary {
+      background: white;
+      color: var(--orange);
+      padding: 16px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      transition: all 0.3s;
+    }
+    
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.3);
+    }
+    
+    .button-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      transition: all 0.3s;
+    }
+    
+    .button-secondary:hover {
+      background: white;
+      color: var(--orange);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--gray-900);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .section-title { font-size: 28px; }
+      .feature-blocks { grid-template-columns: 1fr; }
+      .roi-cards { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .comparison-table { font-size: 14px; }
+      .comparison-table th, .comparison-table td { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">systemify</a>
+        <nav class="nav-links">
+          <a href="/">Home</a>
+          <a href="/compare.html">Compare</a>
+          <a href="/order.html">Order</a>
+        </nav>
+        <a href="/order.html" class="cta-button">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>ChatGPT vs Systemify</h1>
+      <p class="hero-tagline">ChatGPT is a tool you use.<br>Systemify is an assistant that works for you.</p>
+      <p>See why busy founders are switching to AI that actually manages their life.</p>
+    </div>
+  </section>
+
+  <!-- Main Comparison -->
+  <section class="main-content">
+    <div class="container">
+      <h2 class="section-title">The Real Differences</h2>
+      <p class="section-subtitle">Not marketing fluff. Just facts about what each platform can actually do.</p>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>ChatGPT</th>
+            <th>Systemify</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Response to Questions</strong></td>
+            <td><span class="check-yes">✅</span> Excellent</td>
+            <td><span class="check-yes">✅</span> Excellent</td>
+          </tr>
+          <tr>
+            <td><strong>Proactive Actions</strong></td>
+            <td><span class="check-no">❌</span> Only when asked</td>
+            <td><span class="check-yes">✅</span> Works 24/7 without prompting</td>
+          </tr>
+          <tr>
+            <td><strong>Calendar Management</strong></td>
+            <td><span class="check-partial">🟡</span> Read-only</td>
+            <td><span class="check-yes">✅</span> Full read/write/reminders</td>
+          </tr>
+          <tr>
+            <td><strong>Email Monitoring</strong></td>
+            <td><span class="check-partial">🟡</span> Limited</td>
+            <td><span class="check-yes">✅</span> Full access + alerts</td>
+          </tr>
+          <tr>
+            <td><strong>Task Tracking</strong></td>
+            <td><span class="check-no">❌</span> No persistence</td>
+            <td><span class="check-yes">✅</span> Notion integration</td>
+          </tr>
+          <tr>
+            <td><strong>Multi-Channel Access</strong></td>
+            <td><span class="check-no">❌</span> App/Web only</td>
+            <td><span class="check-yes">✅</span> WhatsApp, iMessage, Discord, Telegram</td>
+          </tr>
+          <tr>
+            <td><strong>Persistent Memory</strong></td>
+            <td><span class="check-partial">🟡</span> Limited</td>
+            <td><span class="check-yes">✅</span> Full context history</td>
+          </tr>
+          <tr>
+            <td><strong>Custom Workflows</strong></td>
+            <td><span class="check-partial">🟡</span> Suggests code</td>
+            <td><span class="check-yes">✅</span> Builds and runs automation</td>
+          </tr>
+          <tr>
+            <td><strong>Browser Control</strong></td>
+            <td><span class="check-no">❌</span> No</td>
+            <td><span class="check-yes">✅</span> Full automation</td>
+          </tr>
+          <tr>
+            <td><strong>Image/Video Generation</strong></td>
+            <td><span class="check-yes">✅</span> DALL-E only</td>
+            <td><span class="check-yes">✅</span> Multiple APIs (DALL-E, Midjourney, Runway)</td>
+          </tr>
+          <tr>
+            <td><strong>Music Generation</strong></td>
+            <td><span class="check-no">❌</span> No</td>
+            <td><span class="check-yes">✅</span> Suno V5 integration</td>
+          </tr>
+          <tr>
+            <td><strong>Smart Home Control</strong></td>
+            <td><span class="check-no">❌</span> No</td>
+            <td><span class="check-yes">✅</span> Home Assistant integration</td>
+          </tr>
+          <tr>
+            <td><strong>Privacy</strong></td>
+            <td><span class="check-partial">🟡</span> OpenAI servers</td>
+            <td><span class="check-yes">✅</span> Your hardware, your network</td>
+          </tr>
+          <tr>
+            <td><strong>Data Ownership</strong></td>
+            <td><span class="check-no">❌</span> OpenAI TOS applies</td>
+            <td><span class="check-yes">✅</span> You own everything</td>
+          </tr>
+          <tr>
+            <td><strong>Monthly Cost</strong></td>
+            <td>$20</td>
+            <td>$299</td>
+          </tr>
+          <tr>
+            <td><strong>Setup Cost</strong></td>
+            <td>$0</td>
+            <td>$1,500-2,500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Key Differences -->
+  <section class="main-content" style="padding-top: 0;">
+    <div class="container">
+      <h2 class="section-title">What Founders Think You Can't Do<br>(But Actually Can)</h2>
+      
+      <div class="feature-blocks">
+        <div class="feature-block">
+          <h3>1. Proactive Actions</h3>
+          <h4>What they think:</h4>
+          <p>"AI just responds when I ask it something"</p>
+          <h4>Reality:</h4>
+          <ul>
+            <li>Check your calendar and send morning briefings</li>
+            <li>Monitor email and alert on urgent messages</li>
+            <li>Set reminders automatically</li>
+            <li>Track Notion tasks and follow up</li>
+            <li>Work while you sleep</li>
+          </ul>
+        </div>
+
+        <div class="feature-block">
+          <h3>2. Real Integrations</h3>
+          <h4>What they think:</h4>
+          <p>"ChatGPT can connect to my calendar now"</p>
+          <h4>Reality:</h4>
+          <ul>
+            <li>Write to calendar (not just read)</li>
+            <li>Update Notion databases automatically</li>
+            <li>Send WhatsApp/iMessage/Telegram</li>
+            <li>Control browser and automate web tasks</li>
+            <li>Generate media and deliver directly</li>
+          </ul>
+        </div>
+
+        <div class="feature-block">
+          <h3>3. Persistent Memory</h3>
+          <h4>What they think:</h4>
+          <p>"ChatGPT remembers stuff now"</p>
+          <h4>Reality:</h4>
+          <ul>
+            <li>Long-term curated memory (MEMORY.md)</li>
+            <li>Complete daily logs</li>
+            <li>Semantic search across all history</li>
+            <li>Project memory that never resets</li>
+            <li>Files you own and can edit</li>
+          </ul>
+        </div>
+
+        <div class="feature-block">
+          <h3>4. Multi-Channel Presence</h3>
+          <h4>What they think:</h4>
+          <p>"I have to open ChatGPT to talk to it"</p>
+          <h4>Reality:</h4>
+          <ul>
+            <li>WhatsApp (where you already live)</li>
+            <li>iMessage (native on iPhone)</li>
+            <li>Discord (for communities)</li>
+            <li>Telegram (for privacy)</li>
+            <li>Unified context across all channels</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Section -->
+  <section class="roi-section">
+    <div class="container">
+      <h2 class="section-title">The ROI Calculation</h2>
+      <p class="section-subtitle">If your time is worth $500+/hour, the math is obvious</p>
+      
+      <div class="roi-cards">
+        <div class="roi-card">
+          <h3>Time Saved Per Week</h3>
+          <span class="roi-number">5-10</span>
+          <span class="roi-label">hours</span>
+        </div>
+        
+        <div class="roi-card">
+          <h3>Weekly Value</h3>
+          <span class="roi-number">$2,500</span>
+          <span class="roi-label">minimum (at $500/hr)</span>
+        </div>
+        
+        <div class="roi-card">
+          <h3>Monthly Cost</h3>
+          <span class="roi-number">$299</span>
+          <span class="roi-label">for full automation</span>
+        </div>
+      </div>
+      
+      <p style="margin-top: 48px; font-size: 24px; font-weight: 700;">ROI: <span style="color: var(--orange);">16x</span> in the first month</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Stop Managing Your AI. Let It Manage Your Life.</h2>
+      <p>Join busy founders who switched from ChatGPT to actual automation.</p>
+      <div class="cta-buttons">
+        <a href="/order.html" class="button-primary">Get Started</a>
+        <a href="/" class="button-secondary">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Systemify. Built and operated by Omni ⚡</p>
+    </div>
+  </footer>
+</body>
+</html>

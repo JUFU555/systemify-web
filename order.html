@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Your AI Assistant - Systemify</title>
+  <meta name="description" content="Get your personal AI assistant running in 1 week. Mac Mini hardware + full setup + white-glove onboarding.">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --orange: #FF6B1A;
+      --orange-dark: #E65A0D;
+      --orange-light: #FF8542;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-600: #4B5563;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--gray-900);
+      background: var(--gray-50);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header */
+    header {
+      padding: 24px 0;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+    
+    .nav-links a {
+      color: var(--gray-700);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--orange);
+    }
+    
+    /* Progress Bar */
+    .progress-bar {
+      background: white;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .progress-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    
+    .progress-step::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      right: -50%;
+      height: 2px;
+      background: var(--gray-100);
+      z-index: 0;
+    }
+    
+    .progress-step:last-child::before {
+      display: none;
+    }
+    
+    .progress-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid var(--gray-100);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    
+    .progress-step.active .progress-number {
+      background: var(--orange);
+      color: white;
+      border-color: var(--orange);
+    }
+    
+    .progress-step.completed .progress-number {
+      background: var(--orange);
+      color: white;
+      border-color: var(--orange);
+    }
+    
+    .progress-step.completed::before {
+      background: var(--orange);
+    }
+    
+    .progress-label {
+      font-size: 14px;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+    
+    .progress-step.active .progress-label {
+      color: var(--orange);
+      font-weight: 600;
+    }
+    
+    /* Main Content */
+    .main-content {
+      max-width: 1000px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+    
+    .step-content {
+      display: none;
+    }
+    
+    .step-content.active {
+      display: block;
+    }
+    
+    /* Package Selection */
+    .package-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    
+    .package-card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      border: 3px solid var(--gray-100);
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+    
+    .package-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(255,107,26,0.15);
+    }
+    
+    .package-card.selected {
+      border-color: var(--orange);
+      background: linear-gradient(to bottom, white, var(--gray-50));
+    }
+    
+    .package-badge {
+      position: absolute;
+      top: -12px;
+      right: 40px;
+      background: var(--orange);
+      color: white;
+      padding: 6px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .package-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    
+    .package-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .package-price {
+      text-align: right;
+    }
+    
+    .setup-price {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--orange);
+    }
+    
+    .monthly-price {
+      font-size: 16px;
+      color: var(--gray-600);
+      margin-top: 4px;
+    }
+    
+    .package-features {
+      list-style: none;
+      margin-top: 24px;
+    }
+    
+    .package-features li {
+      padding: 12px 0;
+      color: var(--gray-700);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    
+    .package-features li:last-child {
+      border-bottom: none;
+    }
+    
+    .package-features li:before {
+      content: "✓";
+      color: var(--orange);
+      font-weight: bold;
+      margin-right: 12px;
+    }
+    
+    /* Form */
+    .form-section {
+      background: white;
+      padding: 48px;
+      border-radius: 16px;
+      margin-top: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    .form-section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .form-section p {
+      color: var(--gray-600);
+      margin-bottom: 32px;
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--gray-100);
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 4px rgba(255,107,26,0.1);
+    }
+    
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    
+    .checkbox-label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    
+    /* Buttons */
+    .button-group {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    
+    .button-primary {
+      background: var(--orange);
+      color: white;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,107,26,0.4);
+    }
+    
+    .button-secondary {
+      background: white;
+      color: var(--gray-700);
+      padding: 16px 32px;
+      border: 2px solid var(--gray-300);
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .button-secondary:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    
+    /* Summary */
+    .order-summary {
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      margin-top: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    .order-summary h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--orange);
+      border-top: 2px solid var(--gray-900);
+      margin-top: 12px;
+    }
+    
+    /* Confirmation */
+    .confirmation-box {
+      background: white;
+      padding: 64px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    .success-icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+    }
+    
+    .confirmation-box h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .confirmation-box p {
+      font-size: 18px;
+      color: var(--gray-600);
+      margin-bottom: 32px;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--gray-900);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+      margin-top: 80px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .progress-label {
+        font-size: 12px;
+      }
+      .form-section {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">systemify</a>
+        <nav class="nav-links">
+          <a href="/">Home</a>
+          <a href="/compare.html">Compare</a>
+          <a href="/order.html">Order</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar">
+    <div class="container">
+      <div class="progress-steps">
+        <div class="progress-step active" id="progress-1">
+          <div class="progress-number">1</div>
+          <div class="progress-label">Choose Package</div>
+        </div>
+        <div class="progress-step" id="progress-2">
+          <div class="progress-number">2</div>
+          <div class="progress-label">Your Details</div>
+        </div>
+        <div class="progress-step" id="progress-3">
+          <div class="progress-number">3</div>
+          <div class="progress-label">Review & Pay</div>
+        </div>
+        <div class="progress-step" id="progress-4">
+          <div class="progress-number">4</div>
+          <div class="progress-label">Confirmation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Step 1: Package Selection -->
+    <div class="step-content active" id="step-1">
+      <div class="form-section">
+        <h2>Choose Your Package</h2>
+        <p>Select the plan that fits your needs</p>
+        
+        <div class="package-grid">
+          <div class="package-card" data-package="pro" onclick="selectPackage('pro')">
+            <div class="package-badge">🎉 Launch Offer - First 10 Only</div>
+            <div class="package-header">
+              <div>
+                <div class="package-title">Professional</div>
+                <p style="color: var(--gray-600); margin: 0;">Full AI assistant deployment</p>
+              </div>
+              <div class="package-price">
+                <div class="setup-price">$1,500</div>
+                <div class="monthly-price">+ $299/month</div>
+              </div>
+            </div>
+            <ul class="package-features">
+              <li>Mac Mini M4 Pro (yours to keep)</li>
+              <li>Full Clawdbot configuration</li>
+              <li>WhatsApp + 2 additional channels</li>
+              <li>Notion database templates & integration</li>
+              <li>Custom AI training for your workflow</li>
+              <li>10+ integrations (calendar, email, creative tools)</li>
+              <li>White-glove onboarding (3 live calls)</li>
+              <li>30-day money-back guarantee</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="button-primary" onclick="nextStep(2)">Continue to Details →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Details Form -->
+    <div class="step-content" id="step-2">
+      <div class="form-section">
+        <h2>Tell Us About You</h2>
+        <p>We'll use this to configure your AI assistant perfectly</p>
+        
+        <form id="orderForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="nickname">Preferred Name / Nickname</label>
+              <input type="text" id="nickname" name="nickname" placeholder="What should your AI call you?">
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="timezone">Timezone *</label>
+            <select id="timezone" name="timezone" required>
+              <option value="">Select your timezone</option>
+              <option value="America/New_York">Eastern Time (ET)</option>
+              <option value="America/Chicago">Central Time (CT)</option>
+              <option value="America/Denver">Mountain Time (MT)</option>
+              <option value="America/Los_Angeles">Pacific Time (PT)</option>
+              <option value="Europe/London">London (GMT)</option>
+              <option value="Europe/Paris">Central European Time</option>
+              <option value="Asia/Dubai">Dubai (GST)</option>
+              <option value="Asia/Singapore">Singapore</option>
+              <option value="Asia/Tokyo">Tokyo</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Communication Channels (select all that apply) *</label>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="channels" value="whatsapp">
+                <span>WhatsApp</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="channels" value="imessage">
+                <span>iMessage</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="channels" value="telegram">
+                <span>Telegram</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="channels" value="discord">
+                <span>Discord</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="use-case">Primary Use Case *</label>
+            <select id="use-case" name="use-case" required>
+              <option value="">What will you use your AI for?</option>
+              <option value="business">Business operations & management</option>
+              <option value="creative">Creative work (video, music, design)</option>
+              <option value="personal">Personal productivity & organization</option>
+              <option value="mixed">Mix of business & personal</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="integrations">What tools do you use? (optional)</label>
+            <textarea id="integrations" name="integrations" rows="3" placeholder="e.g., Notion, Google Calendar, Gmail, GitHub, Stripe, etc."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Anything else we should know? (optional)</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Special requests, workflow details, goals for your AI assistant..."></textarea>
+          </div>
+        </form>
+      </div>
+
+      <div class="button-group">
+        <button class="button-secondary" onclick="previousStep(1)">← Back</button>
+        <button class="button-primary" onclick="nextStep(3)">Review Order →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Review & Payment -->
+    <div class="step-content" id="step-3">
+      <div class="form-section">
+        <h2>Review Your Order</h2>
+        <p>Almost there! Review your details and proceed to payment</p>
+        
+        <div id="order-details"></div>
+      </div>
+
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-line">
+          <span>Mac Mini M4 Pro</span>
+          <span>$1,200</span>
+        </div>
+        <div class="summary-line">
+          <span>Setup & Configuration</span>
+          <span>$300</span>
+        </div>
+        <div class="summary-line">
+          <span>First Month Service</span>
+          <span>$299</span>
+        </div>
+        <div class="summary-total">
+          <span>Total Due Today</span>
+          <span>$1,799</span>
+        </div>
+        <p style="margin-top: 16px; color: var(--gray-600); font-size: 14px;">
+          Recurring: $299/month starting in 30 days<br>
+          30-day money-back guarantee | Cancel anytime
+        </p>
+      </div>
+
+      <div class="button-group">
+        <button class="button-secondary" onclick="previousStep(2)">← Back</button>
+        <button class="button-primary" onclick="submitOrder()">Proceed to Payment →</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Confirmation -->
+    <div class="step-content" id="step-4">
+      <div class="confirmation-box">
+        <div class="success-icon">🎉</div>
+        <h2>Order Confirmed!</h2>
+        <p>Thank you for choosing Systemify. Your AI assistant journey begins now.</p>
+        
+        <div style="text-align: left; max-width: 500px; margin: 32px auto; padding: 24px; background: var(--gray-50); border-radius: 12px;">
+          <h3 style="font-size: 20px; margin-bottom: 16px;">What Happens Next:</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">✅ You'll receive a confirmation email within 5 minutes</li>
+            <li style="padding: 8px 0;">📦 Your Mac Mini ships within 3-5 business days</li>
+            <li style="padding: 8px 0;">📧 Setup instructions sent 24h before delivery</li>
+            <li style="padding: 8px 0;">📅 Book your onboarding call (link in email)</li>
+            <li style="padding: 8px 0;">⚡ Your AI will be fully operational within 1 week</li>
+          </ul>
+        </div>
+        
+        <div class="button-group" style="justify-content: center;">
+          <a href="/" class="button-primary">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Systemify. Built and operated by Omni ⚡</p>
+    </div>
+  </footer>
+
+  <script>
+    let currentStep = 1;
+    let selectedPackage = 'pro';
+    let formData = {};
+
+    function selectPackage(packageName) {
+      selectedPackage = packageName;
+      document.querySelectorAll('.package-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      document.querySelector(`[data-package="${packageName}"]`).classList.add('selected');
+    }
+
+    function nextStep(step) {
+      // Validate current step
+      if (currentStep === 2) {
+        const form = document.getElementById('orderForm');
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        // Collect form data
+        const formElements = form.elements;
+        formData = {
+          name: formElements.name.value,
+          nickname: formElements.nickname.value,
+          email: formElements.email.value,
+          phone: formElements.phone.value,
+          timezone: formElements.timezone.value,
+          channels: Array.from(form.querySelectorAll('input[name="channels"]:checked')).map(cb => cb.value),
+          useCase: formElements['use-case'].value,
+          integrations: formElements.integrations.value,
+          notes: formElements.notes.value
+        };
+        
+        // Display order details in step 3
+        displayOrderDetails();
+      }
+      
+      // Hide current step
+      document.getElementById(`step-${currentStep}`).classList.remove('active');
+      document.getElementById(`progress-${currentStep}`).classList.remove('active');
+      document.getElementById(`progress-${currentStep}`).classList.add('completed');
+      
+      // Show next step
+      currentStep = step;
+      document.getElementById(`step-${step}`).classList.add('active');
+      document.getElementById(`progress-${step}`).classList.add('active');
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function previousStep(step) {
+      // Hide current step
+      document.getElementById(`step-${currentStep}`).classList.remove('active');
+      document.getElementById(`progress-${currentStep}`).classList.remove('active');
+      
+      // Show previous step
+      currentStep = step;
+      document.getElementById(`step-${step}`).classList.add('active');
+      document.getElementById(`progress-${step}`).classList.remove('completed');
+      document.getElementById(`progress-${step}`).classList.add('active');
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function displayOrderDetails() {
+      const detailsHtml = `
+        <div style="background: var(--gray-50); padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+          <h3 style="margin-bottom: 16px;">Your Details</h3>
+          <p><strong>Name:</strong> ${formData.name}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Phone:</strong> ${formData.phone}</p>
+          <p><strong>Timezone:</strong> ${formData.timezone}</p>
+          <p><strong>Channels:</strong> ${formData.channels.join(', ')}</p>
+          <p><strong>Use Case:</strong> ${formData.useCase}</p>
+          ${formData.integrations ? `<p><strong>Tools:</strong> ${formData.integrations}</p>` : ''}
+          ${formData.notes ? `<p><strong>Notes:</strong> ${formData.notes}</p>` : ''}
+        </div>
+      `;
+      document.getElementById('order-details').innerHTML = detailsHtml;
+    }
+
+    function submitOrder() {
+      // TODO: Integrate with Stripe / backend
+      console.log('Order submitted:', {
+        package: selectedPackage,
+        ...formData
+      });
+      
+      // For now, just show confirmation
+      // In production, this would process payment first
+      nextStep(4);
+      
+      // TODO: Send to backend/Notion
+      // TODO: Stripe checkout
+      // TODO: Email confirmation
+    }
+
+    // Pre-select professional package
+    selectPackage('pro');
+  </script>
+</body>
+</html>
