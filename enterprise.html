@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Solutions - Systemify</title>
+  <meta name="description" content="Bulk orders and custom deployments for teams, offices, and enterprises. Volume discounts available.">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --orange: #FF6B1A;
+      --bg-dark: #0A0E17;
+      --bg-card: #141824;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A0AEC0;
+      --border: #2D3748;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    
+    /* Header */
+    header {
+      background: rgba(20, 24, 36, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--orange) 0%, #FF8542 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    
+    .back-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .back-link:hover {
+      color: var(--orange);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 80px 24px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255, 107, 26, 0.1) 0%, transparent 100%);
+    }
+    
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero p {
+      font-size: 20px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+    
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+    
+    .benefit-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-4px);
+    }
+    
+    .benefit-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    
+    .benefit-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .benefit-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    /* Pricing Tiers */
+    .pricing-section {
+      margin-bottom: 80px;
+    }
+    
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    
+    .pricing-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+    }
+    
+    .pricing-card.featured {
+      border-color: var(--orange);
+      box-shadow: 0 0 40px rgba(255, 107, 26, 0.3);
+    }
+    
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: white;
+      padding: 6px 20px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .pricing-tier {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    
+    .pricing-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .pricing-amount {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+    
+    .pricing-unit {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    
+    .pricing-features li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    
+    .pricing-features li:last-child {
+      border-bottom: none;
+    }
+    
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--orange);
+      font-weight: 700;
+      margin-right: 12px;
+    }
+    
+    /* Contact Form */
+    .contact-section {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 24px;
+      padding: 60px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-dark);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 20px rgba(255, 107, 26, 0.3);
+    }
+    
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .form-submit {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--orange) 0%, #E65A0D 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(255, 107, 26, 0.5);
+    }
+    
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(255, 107, 26, 0.7);
+    }
+    
+    /* Use Cases */
+    .use-cases {
+      margin-bottom: 80px;
+    }
+    
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .use-case {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .use-case-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .use-case-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .use-case-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+      
+      .contact-section {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">Systemify</a>
+      <a href="index.html" class="back-link">← Back to home</a>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>Enterprise Solutions</h1>
+    <p>Equip your entire team with AI assistants. Bulk orders, custom configurations, and volume discounts for businesses.</p>
+  </div>
+
+  <div class="container">
+    
+    <!-- Benefits -->
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">💼</div>
+        <div class="benefit-title">Volume Discounts</div>
+        <div class="benefit-desc">Save 10-30% on bulk orders of 5+ units. The more you order, the more you save.</div>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">⚙️</div>
+        <div class="benefit-title">Custom Configurations</div>
+        <div class="benefit-desc">Tailored skill packages and integrations specific to your team's workflow.</div>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">🛠️</div>
+        <div class="benefit-title">White-Glove Setup</div>
+        <div class="benefit-desc">We handle deployment, training, and onboarding for your entire organization.</div>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">📊</div>
+        <div class="benefit-title">Centralized Management</div>
+        <div class="benefit-desc">Single dashboard to manage all your team's AI assistants and usage.</div>
+      </div>
+    </div>
+    
+    <!-- Use Cases -->
+    <div class="use-cases">
+      <h2 class="section-title">Perfect For</h2>
+      <p class="section-subtitle">Organizations leveraging AI to scale operations</p>
+      
+      <div class="use-case-grid">
+        <div class="use-case">
+          <div class="use-case-icon">🏢</div>
+          <div class="use-case-title">Agencies</div>
+          <div class="use-case-desc">Content, marketing, and creative teams</div>
+        </div>
+        
+        <div class="use-case">
+          <div class="use-case-icon">🚀</div>
+          <div class="use-case-title">Startups</div>
+          <div class="use-case-desc">Fast-growing teams needing automation</div>
+        </div>
+        
+        <div class="use-case">
+          <div class="use-case-icon">💻</div>
+          <div class="use-case-title">Dev Teams</div>
+          <div class="use-case-desc">Engineering orgs building with AI</div>
+        </div>
+        
+        <div class="use-case">
+          <div class="use-case-icon">🎬</div>
+          <div class="use-case-title">Studios</div>
+          <div class="use-case-desc">Production companies & creators</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pricing Tiers -->
+    <div class="pricing-section">
+      <h2 class="section-title">Volume Pricing</h2>
+      <p class="section-subtitle">Transparent pricing for teams of all sizes</p>
+      
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-tier">Starter</div>
+          <div class="pricing-title">5-10 Units</div>
+          <div class="pricing-amount">10%</div>
+          <div class="pricing-unit">discount</div>
+          <ul class="pricing-features">
+            <li>Email support</li>
+            <li>Standard setup</li>
+            <li>Basic training docs</li>
+            <li>Quarterly check-ins</li>
+          </ul>
+        </div>
+        
+        <div class="pricing-card featured">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-tier">Growth</div>
+          <div class="pricing-title">11-25 Units</div>
+          <div class="pricing-amount">20%</div>
+          <div class="pricing-unit">discount</div>
+          <ul class="pricing-features">
+            <li>Priority support</li>
+            <li>Custom deployment</li>
+            <li>Team training sessions</li>
+            <li>Monthly check-ins</li>
+            <li>Dedicated account manager</li>
+          </ul>
+        </div>
+        
+        <div class="pricing-card">
+          <div class="pricing-tier">Enterprise</div>
+          <div class="pricing-title">26+ Units</div>
+          <div class="pricing-amount">30%</div>
+          <div class="pricing-unit">discount</div>
+          <ul class="pricing-features">
+            <li>24/7 dedicated support</li>
+            <li>White-glove deployment</li>
+            <li>Custom skill development</li>
+            <li>Weekly check-ins</li>
+            <li>Centralized management</li>
+            <li>Custom SLA</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contact Form -->
+    <div class="contact-section">
+      <h2 class="section-title">Get a Custom Quote</h2>
+      <p class="section-subtitle">Tell us about your needs and we'll create a tailored solution</p>
+      
+      <form id="enterprise-form">
+        <div class="form-group">
+          <label class="form-label">Company Name *</label>
+          <input type="text" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Your Name *</label>
+          <input type="text" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input type="email" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" class="form-input">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Number of Units *</label>
+          <select class="form-select" required>
+            <option value="">Select quantity</option>
+            <option value="5-10">5-10 units</option>
+            <option value="11-25">11-25 units</option>
+            <option value="26-50">26-50 units</option>
+            <option value="51+">51+ units</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Hardware Preference</label>
+          <select class="form-select">
+            <option value="">Select hardware</option>
+            <option value="mini-m4">Mac Mini M4</option>
+            <option value="mini-m4-pro">Mac Mini M4 Pro</option>
+            <option value="studio">Mac Studio</option>
+            <option value="mix">Mix of models</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Use Case / Requirements *</label>
+          <textarea class="form-textarea" required placeholder="Tell us about your team's needs, workflows, and what you're looking to automate..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Timeline</label>
+          <select class="form-select">
+            <option value="">When do you need this?</option>
+            <option value="asap">ASAP (1-2 weeks)</option>
+            <option value="month">Within a month</option>
+            <option value="quarter">This quarter</option>
+            <option value="exploring">Just exploring</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="form-submit">Request Quote</button>
+      </form>
+    </div>
+    
+  </div>
+
+  <script>
+    document.getElementById('enterprise-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you! We\'ll get back to you within 24 hours with a custom quote.\n\nFor urgent requests, email: enterprise@systemify.ai');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
