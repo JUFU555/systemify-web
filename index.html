@@ -52,7 +52,7 @@
       font-size: 21px;
       font-weight: 600;
       letter-spacing: -0.5px;
-      color: var(--gray-dark);
+      color: var(--orange);
       text-decoration: none;
     }
     
@@ -86,7 +86,11 @@
       letter-spacing: -2px;
       line-height: 1.05;
       margin-bottom: 16px;
-      background: linear-gradient(90deg, var(--gray-dark) 0%, var(--gray-mid) 100%);
+      color: var(--gray-dark);
+    }
+    
+    .hero h1 .highlight {
+      background: linear-gradient(90deg, var(--orange) 0%, #E65A0D 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -193,8 +197,18 @@
     }
     
     .product-icon {
-      font-size: 64px;
-      margin-bottom: 24px;
+      width: 200px;
+      height: 160px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .product-icon img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
     }
     
     .product-name {
@@ -332,7 +346,7 @@
   </nav>
 
   <section class="hero">
-    <h1>Your AI assistant.<br>Ready to go.</h1>
+    <h1>Your <span class="highlight">AI assistant</span>.<br>Ready to go.</h1>
     <p class="subhead">Pre-configured. Powerful. Personal.</p>
     <p class="description">Mac Mini or Mac Studio with OpenClaw AI assistant installed. Choose your hardware, select your skills, and start automating.</p>
     
@@ -348,7 +362,9 @@
     
     <div class="products-grid">
       <div class="product-card">
-        <div class="product-icon">💻</div>
+        <div class="product-icon">
+          <img src="/images/mac-mini-m4.png" alt="Mac Mini M4">
+        </div>
         <h3 class="product-name">Mac Mini M4</h3>
         <p class="product-desc">Perfect for individuals and small teams. Powerful M4 chip, 16GB RAM.</p>
         <p class="product-price">Starting at $1,099</p>
@@ -356,7 +372,9 @@
       </div>
       
       <div class="product-card">
-        <div class="product-icon">⚡</div>
+        <div class="product-icon">
+          <img src="/images/mac-mini-m4-pro.png" alt="Mac Mini M4 Pro">
+        </div>
         <h3 class="product-name">Mac Mini M4 Pro</h3>
         <p class="product-desc">Pro-level performance for demanding workflows. 24GB RAM, faster processing.</p>
         <p class="product-price">Starting at $1,899</p>
@@ -364,7 +382,9 @@
       </div>
       
       <div class="product-card">
-        <div class="product-icon">🚀</div>
+        <div class="product-icon">
+          <img src="/images/mac-studio.png" alt="Mac Studio">
+        </div>
         <h3 class="product-name">Mac Studio</h3>
         <p class="product-desc">Maximum power. Run local AI models. 32GB+ RAM, enterprise-ready.</p>
         <p class="product-price">Starting at $2,999</p>
