@@ -356,11 +356,13 @@
       background: linear-gradient(135deg, var(--orange) 0%, #E65A0D 100%);
       transform: translateZ(60px);
       box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+      transform-origin: bottom center;
     }
     
     .box-back {
       background: linear-gradient(135deg, #D55A0D 0%, #C04A0D 100%);
       transform: translateZ(-60px) rotateY(180deg);
+      transform-origin: bottom center;
     }
     
     .box-right {
@@ -368,12 +370,54 @@
       width: 120px;
       transform: rotateY(90deg) translateZ(60px);
       box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.15);
+      transform-origin: bottom center;
     }
     
     .box-left {
       background: linear-gradient(to bottom, #E65A0D 0%, #D55A0D 100%);
       width: 120px;
       transform: rotateY(-90deg) translateZ(60px);
+      transform-origin: bottom center;
+    }
+    
+    .process-step.visible .box-front {
+      animation: flapOpenFront 1.2s ease 0.5s both;
+    }
+    
+    .process-step.visible .box-back {
+      animation: flapOpenBack 1.2s ease 0.5s both;
+    }
+    
+    .process-step.visible .box-right {
+      animation: flapOpenRight 1.2s ease 0.5s both;
+    }
+    
+    .process-step.visible .box-left {
+      animation: flapOpenLeft 1.2s ease 0.5s both;
+    }
+    
+    @keyframes flapOpenFront {
+      to {
+        transform: translateZ(60px) rotateX(90deg);
+      }
+    }
+    
+    @keyframes flapOpenBack {
+      to {
+        transform: translateZ(-60px) rotateY(180deg) rotateX(90deg);
+      }
+    }
+    
+    @keyframes flapOpenRight {
+      to {
+        transform: rotateY(90deg) translateZ(60px) rotateX(90deg);
+      }
+    }
+    
+    @keyframes flapOpenLeft {
+      to {
+        transform: rotateY(-90deg) translateZ(60px) rotateX(90deg);
+      }
     }
     
     .box-top {
@@ -410,20 +454,61 @@
     /* Box Interior */
     .box-interior {
       position: absolute;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, #FFB380 0%, #FF8542 50%, var(--orange) 100%);
-      transform: rotateX(90deg) translateZ(59px);
+      width: 116px;
+      height: 116px;
+      background: radial-gradient(circle, rgba(255, 179, 128, 0.9) 0%, rgba(255, 133, 66, 0.8) 50%, rgba(255, 107, 26, 0.7) 100%);
+      transform: rotateX(90deg) translateZ(-2px);
       opacity: 0;
-      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+      box-shadow: 
+        inset 0 0 40px rgba(0, 0, 0, 0.4),
+        0 -10px 30px rgba(255, 107, 26, 0.6);
+      border: 2px solid rgba(0, 0, 0, 0.2);
     }
     
     .process-step.visible .box-interior {
-      animation: interiorReveal 0.3s ease 0.5s both;
+      animation: interiorGlow 0.3s ease 0.5s both;
     }
     
-    @keyframes interiorReveal {
+    @keyframes interiorGlow {
       to {
+        opacity: 1;
+      }
+    }
+    
+    /* Mac Device Rising */
+    .mac-device {
+      position: absolute;
+      width: 80px;
+      height: 50px;
+      background: linear-gradient(135deg, #E0E0E0 0%, #A0A0A0 100%);
+      border: 2px solid #808080;
+      border-radius: 4px;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .mac-device::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 30px;
+      background: #333;
+      border-radius: 2px;
+    }
+    
+    .process-step.visible .mac-device {
+      animation: deviceRise 1s ease 1.2s both;
+    }
+    
+    @keyframes deviceRise {
+      to {
+        bottom: 20px;
         opacity: 1;
       }
     }
@@ -435,14 +520,15 @@
     
     .box-lid {
       position: absolute;
-      width: 120px;
-      height: 120px;
+      width: 124px;
+      height: 124px;
       background: linear-gradient(135deg, #FFB380 0%, var(--orange) 100%);
       border: 2px solid rgba(0, 0, 0, 0.15);
       transform: rotateX(90deg) translateZ(60px);
       box-shadow: 
         0 10px 30px rgba(255,107,26,0.3),
         inset 0 0 20px rgba(255, 255, 255, 0.3);
+      transform-origin: left center;
     }
     
     .box-lid::before {
@@ -458,21 +544,15 @@
     }
     
     .process-step.visible .box-lid {
-      animation: lidFlyAway 1.2s cubic-bezier(0.6, 0.04, 0.98, 0.34) 0.5s both;
+      animation: lidFlipOpen 0.8s ease 0.3s both;
     }
     
-    @keyframes lidFlyAway {
+    @keyframes lidFlipOpen {
       0% {
         transform: rotateX(90deg) translateZ(60px);
-        opacity: 1;
-      }
-      40% {
-        transform: rotateX(90deg) translateZ(60px) translateY(-40px) rotateZ(-15deg);
-        opacity: 1;
       }
       100% {
-        transform: rotateX(90deg) translateZ(60px) translateY(-120px) translateX(-80px) rotateZ(-45deg);
-        opacity: 0;
+        transform: rotateX(90deg) translateZ(60px) rotateZ(-110deg);
       }
     }
     
@@ -883,6 +963,7 @@
             <div class="box-interior"></div>
             <div class="box-face box-bottom"></div>
             <div class="box-lid"></div>
+            <div class="mac-device"></div>
           </div>
           <div class="glow-dot dot-1"></div>
           <div class="glow-dot dot-2"></div>
