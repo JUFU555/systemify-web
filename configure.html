@@ -704,7 +704,7 @@
       <p class="section-subtitle">Select the Mac that fits your workflow</p>
       
       <div class="hardware-grid">
-        <div class="hardware-card" data-hardware="mini-m2" data-price="1500">
+        <div class="hardware-card" data-hardware="mini-m2" data-price="1099">
           <div class="hardware-name">Mac Mini M2</div>
           <div class="hardware-specs">
             • Apple M2 chip<br>
@@ -713,46 +713,46 @@
             • Perfect for individuals
           </div>
           <div class="hardware-price">
-            <span class="hardware-starting">Starting at</span> $1,500
+            <span class="hardware-starting">Starting at</span> $1,099
           </div>
         </div>
         
-        <div class="hardware-card" data-hardware="mini-m4" data-price="2000">
+        <div class="hardware-card" data-hardware="mini-m4" data-price="1099">
           <div class="hardware-name">Mac Mini M4 <span class="badge badge-popular">Popular</span></div>
           <div class="hardware-specs">
             • Apple M4 chip<br>
             • 16GB RAM (base)<br>
-            • 512GB SSD (base)<br>
+            • 256GB SSD (base)<br>
             • Great for professionals
           </div>
           <div class="hardware-price">
-            <span class="hardware-starting">Starting at</span> $2,000
+            <span class="hardware-starting">Starting at</span> $1,099
           </div>
         </div>
         
-        <div class="hardware-card" data-hardware="mini-m4-pro" data-price="2800">
+        <div class="hardware-card" data-hardware="mini-m4-pro" data-price="1899">
           <div class="hardware-name">Mac Mini M4 Pro</div>
           <div class="hardware-specs">
             • Apple M4 Pro chip<br>
             • 24GB RAM (base)<br>
-            • 1TB SSD (base)<br>
+            • 512GB SSD (base)<br>
             • Power user performance
           </div>
           <div class="hardware-price">
-            <span class="hardware-starting">Starting at</span> $2,800
+            <span class="hardware-starting">Starting at</span> $1,899
           </div>
         </div>
         
-        <div class="hardware-card" data-hardware="studio" data-price="5000">
+        <div class="hardware-card" data-hardware="studio" data-price="2999">
           <div class="hardware-name">Mac Studio <span class="badge badge-premium">Premium</span></div>
           <div class="hardware-specs">
-            • Apple M2 Ultra chip<br>
-            • 64GB+ RAM<br>
-            • 2TB+ SSD<br>
+            • Apple M2 Max chip<br>
+            • 32GB RAM (base)<br>
+            • 512GB SSD (base)<br>
             • Local AI models supported
           </div>
           <div class="hardware-price">
-            <span class="hardware-starting">Starting at</span> $5,000
+            <span class="hardware-starting">Starting at</span> $2,999
           </div>
         </div>
       </div>
@@ -916,14 +916,17 @@
       },
       'studio': {
         ram: [
-          { size: '64GB', price: 0 },
-          { size: '128GB', price: 800 },
-          { size: '192GB', price: 1600 }
+          { size: '32GB', price: 0 },
+          { size: '64GB', price: 400 },
+          { size: '96GB', price: 800 },
+          { size: '128GB', price: 1200 }
         ],
         storage: [
-          { size: '2TB', price: 0 },
-          { size: '4TB', price: 1000 },
-          { size: '8TB', price: 2400 }
+          { size: '512GB', price: 0 },
+          { size: '1TB', price: 400 },
+          { size: '2TB', price: 800 },
+          { size: '4TB', price: 1600 },
+          { size: '8TB', price: 3200 }
         ]
       }
     };
@@ -1145,7 +1148,7 @@
         'mini-m2': 'Mac Mini M2',
         'mini-m4': 'Mac Mini M4',
         'mini-m4-pro': 'Mac Mini M4 Pro',
-        'studio': 'Mac Studio'
+        'studio': 'Mac Studio M2 Max'
       };
       return names[config.hardware];
     }
