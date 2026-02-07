@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your AI Computer - Systemify</title>
+  <meta name="description" content="Configure your custom Mac Mini or Mac Studio with OpenClaw AI assistant pre-installed.">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --orange: #FF6B1A;
+      --orange-glow: rgba(255, 107, 26, 0.5);
+      --bg-dark: #0A0E17;
+      --bg-card: #141824;
+      --bg-card-hover: #1A1F2E;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A0AEC0;
+      --border: #2D3748;
+      --border-glow: rgba(255, 107, 26, 0.3);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+    
+    /* Header */
+    header {
+      background: rgba(20, 24, 36, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--orange) 0%, #FF8542 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .back-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+    
+    .back-link:hover {
+      color: var(--orange);
+    }
+    
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 120px;
+    }
+    
+    /* Progress Steps */
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    
+    .progress-steps::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+    
+    .progress-line {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange) 0%, #FF8542 100%);
+      box-shadow: 0 0 10px var(--orange-glow);
+      transition: width 0.5s ease;
+      z-index: 1;
+    }
+    
+    .step {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      flex: 1;
+    }
+    
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    
+    .step.active .step-circle {
+      background: var(--orange);
+      border-color: var(--orange);
+      box-shadow: 0 0 20px var(--orange-glow);
+    }
+    
+    .step.completed .step-circle {
+      background: var(--bg-card);
+      border-color: var(--orange);
+    }
+    
+    .step-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    
+    .step.active .step-label {
+      color: var(--orange);
+    }
+    
+    /* Section */
+    .config-section {
+      margin-bottom: 40px;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    
+    /* Hardware Grid */
+    .hardware-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    
+    .hardware-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hardware-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange) 0%, #FF8542 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .hardware-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      transform: translateY(-4px);
+    }
+    
+    .hardware-card:hover::before {
+      opacity: 1;
+    }
+    
+    .hardware-card.selected {
+      background: var(--bg-card-hover);
+      border-color: var(--orange);
+      box-shadow: 0 0 30px var(--orange-glow);
+    }
+    
+    .hardware-card.selected::before {
+      opacity: 1;
+    }
+    
+    .hardware-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .hardware-specs {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+    
+    .hardware-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    
+    .hardware-starting {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+    
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--orange);
+      color: white;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px var(--orange-glow);
+    }
+    
+    .badge-popular {
+      background: #10B981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+    
+    .badge-premium {
+      background: #8B5CF6;
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    }
+    
+    /* Options */
+    .options-grid {
+      display: grid;
+      gap: 32px;
+    }
+    
+    .option-group {
+      margin-bottom: 20px;
+    }
+    
+    .option-label {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: block;
+      color: var(--text-primary);
+    }
+    
+    .option-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .option-btn {
+      padding: 14px 24px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-card);
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .option-btn:hover {
+      border-color: var(--border-glow);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+    
+    .option-btn.selected {
+      border-color: var(--orange);
+      background: rgba(255, 107, 26, 0.1);
+      color: var(--orange);
+      box-shadow: 0 0 15px var(--orange-glow);
+    }
+    
+    .option-price {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+    
+    .option-btn.selected .option-price {
+      color: var(--orange);
+    }
+    
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      gap: 14px;
+    }
+    
+    .skill-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .skill-card:hover {
+      border-color: var(--border-glow);
+      background: var(--bg-card-hover);
+      transform: translateX(4px);
+    }
+    
+    .skill-card.selected {
+      border-color: var(--orange);
+      background: rgba(255, 107, 26, 0.1);
+      box-shadow: 0 0 15px var(--orange-glow);
+    }
+    
+    .skill-info {
+      flex: 1;
+    }
+    
+    .skill-name {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+    
+    .skill-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .skill-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-left: 20px;
+    }
+    
+    .skill-free {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    
+    /* Support Cards */
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .support-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .support-card:hover {
+      border-color: var(--border-glow);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+    }
+    
+    .support-card.selected {
+      border-color: var(--orange);
+      background: rgba(255, 107, 26, 0.1);
+      box-shadow: 0 0 20px var(--orange-glow);
+    }
+    
+    .support-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .support-name {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .support-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    
+    .support-features {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 2;
+    }
+    
+    .support-features li {
+      margin-left: 20px;
+      margin-bottom: 6px;
+    }
+    
+    /* Mobile Summary Bar */
+    .summary-bar-mobile {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(20, 24, 36, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 2px solid var(--border);
+      padding: 16px 24px;
+      z-index: 200;
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .summary-bar-mobile {
+        display: block;
+      }
+    }
+    
+    .summary-bar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .summary-total-mobile {
+      flex: 1;
+    }
+    
+    .summary-total-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    
+    .summary-total-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    
+    .checkout-btn-mobile {
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--orange) 0%, #E65A0D 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 20px var(--orange-glow);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .checkout-btn-mobile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px var(--orange-glow);
+    }
+    
+    .checkout-btn-mobile:disabled {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+    
+    /* Desktop Summary Panel */
+    .summary-panel-desktop {
+      position: fixed;
+      top: 100px;
+      right: 40px;
+      width: 380px;
+      background: rgba(20, 24, 36, 0.95);
+      backdrop-filter: blur(20px);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      z-index: 50;
+    }
+    
+    @media (max-width: 768px) {
+      .summary-panel-desktop {
+        display: none;
+      }
+    }
+    
+    .summary-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .summary-items {
+      margin-bottom: 24px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .summary-items::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .summary-items::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+      border-radius: 3px;
+    }
+    
+    .summary-items::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+    
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+    
+    .summary-label {
+      color: var(--text-secondary);
+    }
+    
+    .summary-value {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 2px solid var(--orange);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    
+    .total-price {
+      color: var(--orange);
+      text-shadow: 0 0 10px var(--orange-glow);
+    }
+    
+    .checkout-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--orange) 0%, #E65A0D 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px var(--orange-glow);
+    }
+    
+    .checkout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px var(--orange-glow);
+    }
+    
+    .checkout-btn:disabled {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+    
+    .summary-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 12px;
+    }
+    
+    /* Glow Effects */
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 20px var(--orange-glow);
+      }
+      50% {
+        box-shadow: 0 0 30px var(--orange-glow);
+      }
+    }
+    
+    .glow-effect {
+      animation: glow 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">Systemify</div>
+      <a href="index.html" class="back-link">← Back to home</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Progress Steps -->
+    <div class="progress-steps">
+      <div class="progress-line" id="progress-line"></div>
+      <div class="step active" data-step="1">
+        <div class="step-circle">1</div>
+        <div class="step-label">Hardware</div>
+      </div>
+      <div class="step" data-step="2">
+        <div class="step-circle">2</div>
+        <div class="step-label">Specs</div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="step-circle">3</div>
+        <div class="step-label">Skills</div>
+      </div>
+      <div class="step" data-step="4">
+        <div class="step-circle">4</div>
+        <div class="step-label">Support</div>
+      </div>
+    </div>
+    
+    <!-- Step 1: Hardware -->
+    <div class="config-section" id="hardware-section">
+      <h2 class="section-title">Choose Your Hardware</h2>
+      <p class="section-subtitle">Select the Mac that fits your workflow</p>
+      
+      <div class="hardware-grid">
+        <div class="hardware-card" data-hardware="mini-m2" data-price="1099">
+          <div class="hardware-name">Mac Mini M2</div>
+          <div class="hardware-specs">
+            • Apple M2 chip<br>
+            • 8GB RAM (base)<br>
+            • 256GB SSD (base)<br>
+            • Perfect for individuals
+          </div>
+          <div class="hardware-price">
+            <span class="hardware-starting">Starting at</span> $1,099
+          </div>
+        </div>
+        
+        <div class="hardware-card" data-hardware="mini-m4" data-price="1099">
+          <div class="hardware-name">Mac Mini M4 <span class="badge badge-popular">Popular</span></div>
+          <div class="hardware-specs">
+            • Apple M4 chip<br>
+            • 16GB RAM (base)<br>
+            • 256GB SSD (base)<br>
+            • Great for professionals
+          </div>
+          <div class="hardware-price">
+            <span class="hardware-starting">Starting at</span> $1,099
+          </div>
+        </div>
+        
+        <div class="hardware-card" data-hardware="mini-m4-pro" data-price="1899">
+          <div class="hardware-name">Mac Mini M4 Pro</div>
+          <div class="hardware-specs">
+            • Apple M4 Pro chip<br>
+            • 24GB RAM (base)<br>
+            • 512GB SSD (base)<br>
+            • Power user performance
+          </div>
+          <div class="hardware-price">
+            <span class="hardware-starting">Starting at</span> $1,899
+          </div>
+        </div>
+        
+        <div class="hardware-card" data-hardware="studio" data-price="2999">
+          <div class="hardware-name">Mac Studio <span class="badge badge-premium">Premium</span></div>
+          <div class="hardware-specs">
+            • Apple M2 Max chip<br>
+            • 32GB RAM (base)<br>
+            • 512GB SSD (base)<br>
+            • Local AI models supported
+          </div>
+          <div class="hardware-price">
+            <span class="hardware-starting">Starting at</span> $2,999
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Step 2: Specs -->
+    <div class="config-section" id="specs-section" style="display: none;">
+      <h2 class="section-title">Configure Specs</h2>
+      <p class="section-subtitle">Customize your hardware specifications</p>
+      
+      <div class="options-grid">
+        <div class="option-group">
+          <label class="option-label">Memory (RAM)</label>
+          <div class="option-buttons" id="ram-options"></div>
+        </div>
+        
+        <div class="option-group">
+          <label class="option-label">Storage (SSD)</label>
+          <div class="option-buttons" id="storage-options"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Step 3: Skills -->
+    <div class="config-section" id="skills-section" style="display: none;">
+      <h2 class="section-title">Select Skills</h2>
+      <p class="section-subtitle">Choose pre-installed automation skills</p>
+      
+      <div class="skills-grid" id="skills-grid"></div>
+    </div>
+    
+    <!-- Step 4: Support -->
+    <div class="config-section" id="support-section" style="display: none;">
+      <h2 class="section-title">Support Level</h2>
+      <p class="section-subtitle">Choose your ongoing support plan</p>
+      
+      <div class="support-grid">
+        <div class="support-card" data-support="standard" data-price="0">
+          <div class="support-header">
+            <div class="support-name">Standard</div>
+            <div class="support-price">Included</div>
+          </div>
+          <ul class="support-features">
+            <li>Email support</li>
+            <li>Setup documentation</li>
+            <li>Video tutorials</li>
+          </ul>
+        </div>
+        
+        <div class="support-card" data-support="premium" data-price="99">
+          <div class="support-header">
+            <div class="support-name">Premium</div>
+            <div class="support-price">$99/month</div>
+          </div>
+          <ul class="support-features">
+            <li>Priority support</li>
+            <li>Monthly check-ins</li>
+            <li>Free skill updates</li>
+            <li>Remote troubleshooting</li>
+          </ul>
+        </div>
+        
+        <div class="support-card" data-support="enterprise" data-price="499">
+          <div class="support-header">
+            <div class="support-name">Enterprise</div>
+            <div class="support-price">$499/month</div>
+          </div>
+          <ul class="support-features">
+            <li>Dedicated support engineer</li>
+            <li>Custom skill development</li>
+            <li>System management</li>
+            <li>24/7 uptime monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Summary Bar -->
+  <div class="summary-bar-mobile">
+    <div class="summary-bar-content">
+      <div class="summary-total-mobile">
+        <div class="summary-total-label">Total</div>
+        <div class="summary-total-price" id="total-price-mobile">$0</div>
+      </div>
+      <button class="checkout-btn-mobile" id="checkout-btn-mobile" disabled>Checkout</button>
+    </div>
+  </div>
+
+  <!-- Desktop Summary Panel -->
+  <div class="summary-panel-desktop">
+    <h3 class="summary-title">Your Configuration</h3>
+    
+    <div class="summary-items" id="summary-items">
+      <div class="summary-item">
+        <span class="summary-label">Select hardware to begin</span>
+        <span class="summary-value">—</span>
+      </div>
+    </div>
+    
+    <div class="summary-total">
+      <span>Total</span>
+      <span class="total-price" id="total-price">$0</span>
+    </div>
+    
+    <button class="checkout-btn glow-effect" id="checkout-btn" disabled>Continue to Checkout</button>
+    <p class="summary-note">Free shipping • 30-day return policy</p>
+  </div>
+
+  <script>
+    // Same configuration logic as before
+    const config = {
+      hardware: null,
+      hardwarePrice: 0,
+      ram: null,
+      ramPrice: 0,
+      storage: null,
+      storagePrice: 0,
+      skills: [],
+      skillsPrice: 0,
+      support: 'standard',
+      supportPrice: 0
+    };
+    
+    const hardwareSpecs = {
+      'mini-m2': {
+        ram: [
+          { size: '8GB', price: 0 },
+          { size: '16GB', price: 200 },
+          { size: '24GB', price: 400 }
+        ],
+        storage: [
+          { size: '256GB', price: 0 },
+          { size: '512GB', price: 200 },
+          { size: '1TB', price: 600 }
+        ]
+      },
+      'mini-m4': {
+        ram: [
+          { size: '16GB', price: 0 },
+          { size: '24GB', price: 200 },
+          { size: '32GB', price: 400 }
+        ],
+        storage: [
+          { size: '512GB', price: 0 },
+          { size: '1TB', price: 400 },
+          { size: '2TB', price: 800 }
+        ]
+      },
+      'mini-m4-pro': {
+        ram: [
+          { size: '24GB', price: 0 },
+          { size: '32GB', price: 200 },
+          { size: '48GB', price: 600 }
+        ],
+        storage: [
+          { size: '1TB', price: 0 },
+          { size: '2TB', price: 600 },
+          { size: '4TB', price: 1400 }
+        ]
+      },
+      'studio': {
+        ram: [
+          { size: '32GB', price: 0 },
+          { size: '64GB', price: 400 },
+          { size: '96GB', price: 800 },
+          { size: '128GB', price: 1200 }
+        ],
+        storage: [
+          { size: '512GB', price: 0 },
+          { size: '1TB', price: 400 },
+          { size: '2TB', price: 800 },
+          { size: '4TB', price: 1600 },
+          { size: '8TB', price: 3200 }
+        ]
+      }
+    };
+    
+    const skills = [
+      { id: 'essentials', name: 'Essential Pack', desc: 'Weather, calendar, basic automation', price: 0 },
+      { id: 'content', name: 'Content Creator Pack', desc: 'Video tools, social media, image generation', price: 300 },
+      { id: 'business', name: 'Business Pack', desc: 'CRM, email automation, analytics', price: 400 },
+      { id: 'developer', name: 'Developer Pack', desc: 'Coding agents, GitHub, CI/CD', price: 500 },
+      { id: 'social', name: 'Social Media Suite', desc: 'LinkedIn, Twitter, Instagram automation', price: 250 },
+      { id: 'custom', name: 'Custom Integrations', desc: 'Notion, Slack, Airtable, custom APIs', price: 600 }
+    ];
+    
+    const studioSkills = [
+      { id: 'llama', name: 'Llama 3 70B Local', desc: 'Run Meta\'s Llama 3 locally for privacy', price: 500 },
+      { id: 'mistral', name: 'Mistral Large Local', desc: 'Mistral AI running on your hardware', price: 500 },
+      { id: 'code-model', name: 'Code-Focused Model', desc: 'Specialized model for programming tasks', price: 400 }
+    ];
+    
+    let currentStep = 1;
+    
+    // Hardware selection
+    document.querySelectorAll('.hardware-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.hardware-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        
+        config.hardware = card.dataset.hardware;
+        config.hardwarePrice = parseInt(card.dataset.price);
+        
+        document.getElementById('specs-section').style.display = 'block';
+        loadSpecs(config.hardware);
+        
+        document.getElementById('skills-section').style.display = 'block';
+        loadSkills(config.hardware);
+        
+        document.getElementById('support-section').style.display = 'block';
+        
+        updateStep(2);
+        updateSummary();
+      });
+    });
+    
+    function loadSpecs(hardware) {
+      const specs = hardwareSpecs[hardware];
+      
+      const ramContainer = document.getElementById('ram-options');
+      ramContainer.innerHTML = '';
+      specs.ram.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn' + (index === 0 ? ' selected' : '');
+        btn.innerHTML = `
+          ${option.size}
+          <span class="option-price">${option.price > 0 ? '+$' + option.price : 'Included'}</span>
+        `;
+        btn.onclick = () => selectOption('ram', option, btn);
+        ramContainer.appendChild(btn);
+      });
+      
+      const storageContainer = document.getElementById('storage-options');
+      storageContainer.innerHTML = '';
+      specs.storage.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn' + (index === 0 ? ' selected' : '');
+        btn.innerHTML = `
+          ${option.size}
+          <span class="option-price">${option.price > 0 ? '+$' + option.price : 'Included'}</span>
+        `;
+        btn.onclick = () => selectOption('storage', option, btn);
+        storageContainer.appendChild(btn);
+      });
+      
+      config.ram = specs.ram[0].size;
+      config.ramPrice = specs.ram[0].price;
+      config.storage = specs.storage[0].size;
+      config.storagePrice = specs.storage[0].price;
+    }
+    
+    function selectOption(type, option, btn) {
+      const container = btn.parentElement;
+      container.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      
+      if (type === 'ram') {
+        config.ram = option.size;
+        config.ramPrice = option.price;
+      } else {
+        config.storage = option.size;
+        config.storagePrice = option.price;
+      }
+      
+      if (currentStep === 2) updateStep(3);
+      updateSummary();
+    }
+    
+    function loadSkills(hardware) {
+      const container = document.getElementById('skills-grid');
+      container.innerHTML = '';
+      
+      const availableSkills = hardware === 'studio' ? [...skills, ...studioSkills] : skills;
+      
+      availableSkills.forEach(skill => {
+        const card = document.createElement('div');
+        card.className = 'skill-card' + (skill.price === 0 ? ' selected' : '');
+        card.innerHTML = `
+          <div class="skill-info">
+            <div class="skill-name">${skill.name}</div>
+            <div class="skill-desc">${skill.desc}</div>
+          </div>
+          <div class="skill-price ${skill.price === 0 ? 'skill-free' : ''}">
+            ${skill.price === 0 ? 'Free' : '+$' + skill.price}
+          </div>
+        `;
+        
+        card.onclick = () => toggleSkill(skill, card);
+        container.appendChild(card);
+      });
+      
+      config.skills = [skills[0]];
+      config.skillsPrice = 0;
+    }
+    
+    function toggleSkill(skill, card) {
+      if (skill.price === 0) return;
+      
+      const index = config.skills.findIndex(s => s.id === skill.id);
+      
+      if (index > -1) {
+        config.skills.splice(index, 1);
+        card.classList.remove('selected');
+      } else {
+        config.skills.push(skill);
+        card.classList.add('selected');
+      }
+      
+      config.skillsPrice = config.skills.reduce((sum, s) => sum + s.price, 0);
+      if (currentStep === 3 && config.skills.length > 1) updateStep(4);
+      updateSummary();
+    }
+    
+    document.querySelectorAll('.support-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.support-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        
+        config.support = card.dataset.support;
+        config.supportPrice = parseInt(card.dataset.price);
+        
+        updateSummary();
+      });
+    });
+    
+    document.querySelector('[data-support="standard"]').classList.add('selected');
+    
+    function updateStep(step) {
+      currentStep = step;
+      document.querySelectorAll('.step').forEach((s, i) => {
+        s.classList.remove('active', 'completed');
+        if (i + 1 < step) s.classList.add('completed');
+        if (i + 1 === step) s.classList.add('active');
+      });
+      
+      const progressLine = document.getElementById('progress-line');
+      const width = ((step - 1) / 3) * 100;
+      progressLine.style.width = width + '%';
+    }
+    
+    function updateSummary() {
+      const container = document.getElementById('summary-items');
+      container.innerHTML = '';
+      
+      if (config.hardware) {
+        addSummaryItem('Hardware', getHardwareName(), `$${config.hardwarePrice}`);
+        
+        if (config.ramPrice > 0) {
+          addSummaryItem('RAM Upgrade', config.ram, `+$${config.ramPrice}`);
+        }
+        if (config.storagePrice > 0) {
+          addSummaryItem('Storage Upgrade', config.storage, `+$${config.storagePrice}`);
+        }
+        
+        config.skills.forEach(skill => {
+          if (skill.price > 0) {
+            addSummaryItem('Skill', skill.name, `+$${skill.price}`);
+          }
+        });
+        
+        if (config.supportPrice > 0) {
+          addSummaryItem('Support', `${capitalize(config.support)} Plan`, `$${config.supportPrice}/mo`);
+        }
+      }
+      
+      const hardwareTotal = config.hardwarePrice + config.ramPrice + config.storagePrice + config.skillsPrice;
+      document.getElementById('total-price').textContent = `$${hardwareTotal.toLocaleString()}`;
+      document.getElementById('total-price-mobile').textContent = `$${hardwareTotal.toLocaleString()}`;
+      
+      const btns = [document.getElementById('checkout-btn'), document.getElementById('checkout-btn-mobile')];
+      btns.forEach(btn => {
+        btn.disabled = !config.hardware;
+        if (config.hardware) {
+          btn.onclick = () => checkout();
+        }
+      });
+    }
+    
+    function addSummaryItem(label, value, price) {
+      const container = document.getElementById('summary-items');
+      const item = document.createElement('div');
+      item.className = 'summary-item';
+      item.innerHTML = `
+        <span class="summary-label">${label}: ${value}</span>
+        <span class="summary-value">${price}</span>
+      `;
+      container.appendChild(item);
+    }
+    
+    function getHardwareName() {
+      const names = {
+        'mini-m2': 'Mac Mini M2',
+        'mini-m4': 'Mac Mini M4',
+        'mini-m4-pro': 'Mac Mini M4 Pro',
+        'studio': 'Mac Studio M2 Max'
+      };
+      return names[config.hardware];
+    }
+    
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+    
+    function checkout() {
+      console.log('Configuration:', config);
+      alert('Configuration saved! Payment integration coming soon.\n\nYour config:\n' + JSON.stringify(config, null, 2));
+    }
+  </script>
+</body>
+</html>

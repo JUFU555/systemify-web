@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your AI Computer - Systemify</title>
+  <meta name="description" content="Configure your custom Mac Mini or Mac Studio with OpenClaw AI assistant pre-installed. Choose your hardware, skills, and support level.">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --orange: #FF6B1A;
+      --orange-dark: #E65A0D;
+      --orange-light: #FF8542;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-600: #4B5563;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--gray-900);
+      background: var(--gray-50);
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    
+    /* Header */
+    header {
+      background: white;
+      padding: 20px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+    
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    
+    .back-link {
+      color: var(--gray-600);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .back-link:hover {
+      color: var(--orange);
+    }
+    
+    /* Main Grid */
+    .config-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    
+    @media (max-width: 1024px) {
+      .config-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .summary-panel {
+        order: -1;
+      }
+    }
+    
+    /* Configuration Sections */
+    .config-section {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--gray-900);
+    }
+    
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--gray-600);
+      margin-bottom: 24px;
+    }
+    
+    /* Hardware Options */
+    .hardware-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    
+    .hardware-card {
+      border: 2px solid var(--gray-100);
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .hardware-card:hover {
+      border-color: var(--orange-light);
+      transform: translateY(-2px);
+    }
+    
+    .hardware-card.selected {
+      border-color: var(--orange);
+      background: #FFF7F0;
+    }
+    
+    .hardware-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .hardware-specs {
+      font-size: 14px;
+      color: var(--gray-600);
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+    
+    .hardware-price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    
+    .hardware-starting {
+      font-size: 12px;
+      color: var(--gray-600);
+      font-weight: 400;
+    }
+    
+    /* RAM/Storage Options */
+    .options-grid {
+      display: grid;
+      gap: 24px;
+    }
+    
+    .option-group {
+      margin-bottom: 20px;
+    }
+    
+    .option-label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: block;
+    }
+    
+    .option-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .option-btn {
+      padding: 12px 20px;
+      border: 2px solid var(--gray-100);
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    
+    .option-btn:hover {
+      border-color: var(--orange-light);
+    }
+    
+    .option-btn.selected {
+      border-color: var(--orange);
+      background: var(--orange);
+      color: white;
+    }
+    
+    .option-price {
+      font-size: 12px;
+      color: var(--gray-600);
+      display: block;
+      margin-top: 4px;
+    }
+    
+    .option-btn.selected .option-price {
+      color: rgba(255,255,255,0.9);
+    }
+    
+    /* Skills Selection */
+    .skills-grid {
+      display: grid;
+      gap: 12px;
+    }
+    
+    .skill-card {
+      border: 2px solid var(--gray-100);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .skill-card:hover {
+      border-color: var(--orange-light);
+    }
+    
+    .skill-card.selected {
+      border-color: var(--orange);
+      background: #FFF7F0;
+    }
+    
+    .skill-info {
+      flex: 1;
+    }
+    
+    .skill-name {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .skill-desc {
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    
+    .skill-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-left: 16px;
+    }
+    
+    .skill-free {
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+    
+    /* Support Levels */
+    .support-grid {
+      display: grid;
+      gap: 16px;
+    }
+    
+    .support-card {
+      border: 2px solid var(--gray-100);
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .support-card:hover {
+      border-color: var(--orange-light);
+    }
+    
+    .support-card.selected {
+      border-color: var(--orange);
+      background: #FFF7F0;
+    }
+    
+    .support-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .support-name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .support-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    
+    .support-features {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.8;
+    }
+    
+    .support-features li {
+      margin-left: 20px;
+      margin-bottom: 4px;
+    }
+    
+    /* Summary Panel */
+    .summary-panel {
+      position: sticky;
+      top: 24px;
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+    
+    .summary-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    
+    .summary-items {
+      margin-bottom: 24px;
+    }
+    
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 14px;
+    }
+    
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+    
+    .summary-label {
+      color: var(--gray-700);
+    }
+    
+    .summary-value {
+      font-weight: 600;
+    }
+    
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 2px solid var(--gray-900);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    
+    .total-price {
+      color: var(--orange);
+    }
+    
+    .checkout-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .checkout-btn:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255,107,26,0.3);
+    }
+    
+    .checkout-btn:disabled {
+      background: var(--gray-100);
+      color: var(--gray-600);
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .summary-note {
+      font-size: 12px;
+      color: var(--gray-600);
+      text-align: center;
+      margin-top: 12px;
+    }
+    
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--orange);
+      color: white;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-left: 8px;
+    }
+    
+    .badge-popular {
+      background: #10B981;
+    }
+    
+    .badge-premium {
+      background: #8B5CF6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">Systemify</div>
+      <a href="index.html" class="back-link">← Back to home</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="config-grid">
+      <!-- Left Column: Configuration Options -->
+      <div class="config-content">
+        
+        <!-- Step 1: Hardware Selection -->
+        <div class="config-section">
+          <h2 class="section-title">1. Choose Your Hardware</h2>
+          <p class="section-subtitle">Select the Mac that fits your workflow</p>
+          
+          <div class="hardware-grid">
+            <div class="hardware-card" data-hardware="mini-m2" data-price="1500">
+              <div class="hardware-name">Mac Mini M2</div>
+              <div class="hardware-specs">
+                • Apple M2 chip<br>
+                • 8GB RAM (base)<br>
+                • 256GB SSD (base)<br>
+                • Perfect for individuals
+              </div>
+              <div class="hardware-price">
+                <span class="hardware-starting">Starting at</span> $1,500
+              </div>
+            </div>
+            
+            <div class="hardware-card" data-hardware="mini-m4" data-price="2000">
+              <div class="hardware-name">Mac Mini M4 <span class="badge badge-popular">Popular</span></div>
+              <div class="hardware-specs">
+                • Apple M4 chip<br>
+                • 16GB RAM (base)<br>
+                • 512GB SSD (base)<br>
+                • Great for professionals
+              </div>
+              <div class="hardware-price">
+                <span class="hardware-starting">Starting at</span> $2,000
+              </div>
+            </div>
+            
+            <div class="hardware-card" data-hardware="mini-m4-pro" data-price="2800">
+              <div class="hardware-name">Mac Mini M4 Pro</div>
+              <div class="hardware-specs">
+                • Apple M4 Pro chip<br>
+                • 24GB RAM (base)<br>
+                • 1TB SSD (base)<br>
+                • Power user performance
+              </div>
+              <div class="hardware-price">
+                <span class="hardware-starting">Starting at</span> $2,800
+              </div>
+            </div>
+            
+            <div class="hardware-card" data-hardware="studio" data-price="5000">
+              <div class="hardware-name">Mac Studio <span class="badge badge-premium">Premium</span></div>
+              <div class="hardware-specs">
+                • Apple M2 Ultra chip<br>
+                • 64GB+ RAM<br>
+                • 2TB+ SSD<br>
+                • Local AI models supported
+              </div>
+              <div class="hardware-price">
+                <span class="hardware-starting">Starting at</span> $5,000
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 2: RAM & Storage -->
+        <div class="config-section" id="specs-section" style="display: none;">
+          <h2 class="section-title">2. Configure Specs</h2>
+          <p class="section-subtitle">Customize your hardware specifications</p>
+          
+          <div class="options-grid">
+            <div class="option-group">
+              <label class="option-label">Memory (RAM)</label>
+              <div class="option-buttons" id="ram-options"></div>
+            </div>
+            
+            <div class="option-group">
+              <label class="option-label">Storage (SSD)</label>
+              <div class="option-buttons" id="storage-options"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 3: Skills Selection -->
+        <div class="config-section" id="skills-section" style="display: none;">
+          <h2 class="section-title">3. Select Skills</h2>
+          <p class="section-subtitle">Choose pre-installed automation skills</p>
+          
+          <div class="skills-grid" id="skills-grid"></div>
+        </div>
+        
+        <!-- Step 4: Support Level -->
+        <div class="config-section" id="support-section" style="display: none;">
+          <h2 class="section-title">4. Support Level</h2>
+          <p class="section-subtitle">Choose your ongoing support plan</p>
+          
+          <div class="support-grid">
+            <div class="support-card" data-support="standard" data-price="0">
+              <div class="support-header">
+                <div class="support-name">Standard</div>
+                <div class="support-price">Included</div>
+              </div>
+              <ul class="support-features">
+                <li>Email support</li>
+                <li>Setup documentation</li>
+                <li>Video tutorials</li>
+              </ul>
+            </div>
+            
+            <div class="support-card" data-support="premium" data-price="99">
+              <div class="support-header">
+                <div class="support-name">Premium</div>
+                <div class="support-price">$99/month</div>
+              </div>
+              <ul class="support-features">
+                <li>Priority support</li>
+                <li>Monthly check-ins</li>
+                <li>Free skill updates</li>
+                <li>Remote troubleshooting</li>
+              </ul>
+            </div>
+            
+            <div class="support-card" data-support="enterprise" data-price="499">
+              <div class="support-header">
+                <div class="support-name">Enterprise</div>
+                <div class="support-price">$499/month</div>
+              </div>
+              <ul class="support-features">
+                <li>Dedicated support engineer</li>
+                <li>Custom skill development</li>
+                <li>System management</li>
+                <li>24/7 uptime monitoring</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Right Column: Summary Panel -->
+      <div class="summary-panel">
+        <h3 class="summary-title">Your Configuration</h3>
+        
+        <div class="summary-items" id="summary-items">
+          <div class="summary-item">
+            <span class="summary-label">Select hardware to begin</span>
+            <span class="summary-value">—</span>
+          </div>
+        </div>
+        
+        <div class="summary-total">
+          <span>Total</span>
+          <span class="total-price" id="total-price">$0</span>
+        </div>
+        
+        <button class="checkout-btn" id="checkout-btn" disabled>Continue to Checkout</button>
+        <p class="summary-note">Free shipping • 30-day return policy</p>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    // Configuration state
+    const config = {
+      hardware: null,
+      hardwarePrice: 0,
+      ram: null,
+      ramPrice: 0,
+      storage: null,
+      storagePrice: 0,
+      skills: [],
+      skillsPrice: 0,
+      support: 'standard',
+      supportPrice: 0
+    };
+    
+    // Hardware specs configurations
+    const hardwareSpecs = {
+      'mini-m2': {
+        ram: [
+          { size: '8GB', price: 0 },
+          { size: '16GB', price: 200 },
+          { size: '24GB', price: 400 }
+        ],
+        storage: [
+          { size: '256GB', price: 0 },
+          { size: '512GB', price: 200 },
+          { size: '1TB', price: 600 }
+        ]
+      },
+      'mini-m4': {
+        ram: [
+          { size: '16GB', price: 0 },
+          { size: '24GB', price: 200 },
+          { size: '32GB', price: 400 }
+        ],
+        storage: [
+          { size: '512GB', price: 0 },
+          { size: '1TB', price: 400 },
+          { size: '2TB', price: 800 }
+        ]
+      },
+      'mini-m4-pro': {
+        ram: [
+          { size: '24GB', price: 0 },
+          { size: '32GB', price: 200 },
+          { size: '48GB', price: 600 }
+        ],
+        storage: [
+          { size: '1TB', price: 0 },
+          { size: '2TB', price: 600 },
+          { size: '4TB', price: 1400 }
+        ]
+      },
+      'studio': {
+        ram: [
+          { size: '64GB', price: 0 },
+          { size: '128GB', price: 800 },
+          { size: '192GB', price: 1600 }
+        ],
+        storage: [
+          { size: '2TB', price: 0 },
+          { size: '4TB', price: 1000 },
+          { size: '8TB', price: 2400 }
+        ]
+      }
+    };
+    
+    // Available skills
+    const skills = [
+      { id: 'essentials', name: 'Essential Pack', desc: 'Weather, calendar, basic automation', price: 0 },
+      { id: 'content', name: 'Content Creator Pack', desc: 'Video tools, social media, image generation', price: 300 },
+      { id: 'business', name: 'Business Pack', desc: 'CRM, email automation, analytics', price: 400 },
+      { id: 'developer', name: 'Developer Pack', desc: 'Coding agents, GitHub, CI/CD', price: 500 },
+      { id: 'social', name: 'Social Media Suite', desc: 'LinkedIn, Twitter, Instagram automation', price: 250 },
+      { id: 'custom', name: 'Custom Integrations', desc: 'Notion, Slack, Airtable, custom APIs', price: 600 }
+    ];
+    
+    // Mac Studio exclusive
+    const studioSkills = [
+      { id: 'llama', name: 'Llama 3 70B Local', desc: 'Run Meta\'s Llama 3 locally for privacy', price: 500 },
+      { id: 'mistral', name: 'Mistral Large Local', desc: 'Mistral AI running on your hardware', price: 500 },
+      { id: 'code-model', name: 'Code-Focused Model', desc: 'Specialized model for programming tasks', price: 400 }
+    ];
+    
+    // Hardware selection
+    document.querySelectorAll('.hardware-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.hardware-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        
+        config.hardware = card.dataset.hardware;
+        config.hardwarePrice = parseInt(card.dataset.price);
+        
+        // Show specs section
+        document.getElementById('specs-section').style.display = 'block';
+        loadSpecs(config.hardware);
+        
+        // Show skills section
+        document.getElementById('skills-section').style.display = 'block';
+        loadSkills(config.hardware);
+        
+        // Show support section
+        document.getElementById('support-section').style.display = 'block';
+        
+        updateSummary();
+      });
+    });
+    
+    // Load RAM/Storage options
+    function loadSpecs(hardware) {
+      const specs = hardwareSpecs[hardware];
+      
+      // RAM options
+      const ramContainer = document.getElementById('ram-options');
+      ramContainer.innerHTML = '';
+      specs.ram.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn' + (index === 0 ? ' selected' : '');
+        btn.innerHTML = `
+          ${option.size}
+          <span class="option-price">${option.price > 0 ? '+$' + option.price : 'Included'}</span>
+        `;
+        btn.onclick = () => selectOption('ram', option, btn);
+        ramContainer.appendChild(btn);
+      });
+      
+      // Storage options
+      const storageContainer = document.getElementById('storage-options');
+      storageContainer.innerHTML = '';
+      specs.storage.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn' + (index === 0 ? ' selected' : '');
+        btn.innerHTML = `
+          ${option.size}
+          <span class="option-price">${option.price > 0 ? '+$' + option.price : 'Included'}</span>
+        `;
+        btn.onclick = () => selectOption('storage', option, btn);
+        storageContainer.appendChild(btn);
+      });
+      
+      // Set defaults
+      config.ram = specs.ram[0].size;
+      config.ramPrice = specs.ram[0].price;
+      config.storage = specs.storage[0].size;
+      config.storagePrice = specs.storage[0].price;
+    }
+    
+    function selectOption(type, option, btn) {
+      const container = btn.parentElement;
+      container.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      
+      if (type === 'ram') {
+        config.ram = option.size;
+        config.ramPrice = option.price;
+      } else {
+        config.storage = option.size;
+        config.storagePrice = option.price;
+      }
+      
+      updateSummary();
+    }
+    
+    // Load skills
+    function loadSkills(hardware) {
+      const container = document.getElementById('skills-grid');
+      container.innerHTML = '';
+      
+      const availableSkills = hardware === 'studio' ? [...skills, ...studioSkills] : skills;
+      
+      availableSkills.forEach(skill => {
+        const card = document.createElement('div');
+        card.className = 'skill-card' + (skill.price === 0 ? ' selected' : '');
+        card.innerHTML = `
+          <div class="skill-info">
+            <div class="skill-name">${skill.name}</div>
+            <div class="skill-desc">${skill.desc}</div>
+          </div>
+          <div class="skill-price ${skill.price === 0 ? 'skill-free' : ''}">
+            ${skill.price === 0 ? 'Free' : '+$' + skill.price}
+          </div>
+        `;
+        
+        card.onclick = () => toggleSkill(skill, card);
+        container.appendChild(card);
+      });
+      
+      // Auto-select essentials
+      config.skills = [skills[0]];
+      config.skillsPrice = 0;
+    }
+    
+    function toggleSkill(skill, card) {
+      if (skill.price === 0) return; // Essentials are always included
+      
+      const index = config.skills.findIndex(s => s.id === skill.id);
+      
+      if (index > -1) {
+        config.skills.splice(index, 1);
+        card.classList.remove('selected');
+      } else {
+        config.skills.push(skill);
+        card.classList.add('selected');
+      }
+      
+      config.skillsPrice = config.skills.reduce((sum, s) => sum + s.price, 0);
+      updateSummary();
+    }
+    
+    // Support selection
+    document.querySelectorAll('.support-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.support-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        
+        config.support = card.dataset.support;
+        config.supportPrice = parseInt(card.dataset.price);
+        
+        updateSummary();
+      });
+    });
+    
+    // Select standard support by default
+    document.querySelector('[data-support="standard"]').classList.add('selected');
+    
+    // Update summary
+    function updateSummary() {
+      const container = document.getElementById('summary-items');
+      container.innerHTML = '';
+      
+      if (config.hardware) {
+        // Hardware
+        addSummaryItem('Hardware', getHardwareName(), `$${config.hardwarePrice}`);
+        
+        // RAM & Storage
+        if (config.ramPrice > 0) {
+          addSummaryItem('RAM Upgrade', config.ram, `+$${config.ramPrice}`);
+        }
+        if (config.storagePrice > 0) {
+          addSummaryItem('Storage Upgrade', config.storage, `+$${config.storagePrice}`);
+        }
+        
+        // Skills
+        config.skills.forEach(skill => {
+          if (skill.price > 0) {
+            addSummaryItem('Skill', skill.name, `+$${skill.price}`);
+          }
+        });
+        
+        // Support
+        if (config.supportPrice > 0) {
+          addSummaryItem('Support', `${capitalize(config.support)} Plan`, `$${config.supportPrice}/mo`);
+        }
+      }
+      
+      // Calculate total
+      const hardwareTotal = config.hardwarePrice + config.ramPrice + config.storagePrice + config.skillsPrice;
+      document.getElementById('total-price').textContent = `$${hardwareTotal.toLocaleString()}`;
+      
+      // Enable checkout
+      const btn = document.getElementById('checkout-btn');
+      btn.disabled = !config.hardware;
+      if (config.hardware) {
+        btn.onclick = () => checkout();
+      }
+    }
+    
+    function addSummaryItem(label, value, price) {
+      const container = document.getElementById('summary-items');
+      const item = document.createElement('div');
+      item.className = 'summary-item';
+      item.innerHTML = `
+        <span class="summary-label">${label}: ${value}</span>
+        <span class="summary-value">${price}</span>
+      `;
+      container.appendChild(item);
+    }
+    
+    function getHardwareName() {
+      const names = {
+        'mini-m2': 'Mac Mini M2',
+        'mini-m4': 'Mac Mini M4',
+        'mini-m4-pro': 'Mac Mini M4 Pro',
+        'studio': 'Mac Studio'
+      };
+      return names[config.hardware];
+    }
+    
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+    
+    function checkout() {
+      // For now, just log the config
+      console.log('Configuration:', config);
+      
+      // TODO: Integrate with payment processor
+      alert('Configuration saved! Payment integration coming soon.\n\nYour config:\n' + JSON.stringify(config, null, 2));
+    }
+  </script>
+</body>
+</html>
