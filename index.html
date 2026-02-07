@@ -187,11 +187,26 @@
       border-radius: 18px;
       padding: 48px 32px;
       text-align: center;
-      transition: all 0.3s;
+      transition: all 0.5s ease;
       border: 1px solid rgba(0, 0, 0, 0.06);
+      opacity: 0;
+      transform: translateY(30px);
     }
     
-    .product-card:hover {
+    .product-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .product-card:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+    
+    .product-card:nth-child(3) {
+      transition-delay: 0.2s;
+    }
+    
+    .product-card.visible:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
     }
@@ -255,7 +270,15 @@
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
-      margin-bottom: 100px;
+      margin-bottom: 120px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .feature.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     
     .feature:nth-child(even) {
@@ -280,13 +303,42 @@
     }
     
     .feature-visual {
-      background: var(--gray-light);
-      border-radius: 18px;
-      height: 280px;
+      background: linear-gradient(135deg, var(--gray-light) 0%, #FAFAFA 100%);
+      border-radius: 24px;
+      height: 320px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 64px;
+      font-size: 72px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      transform: scale(0.95);
+      transition: transform 0.8s ease;
+    }
+    
+    .feature.visible .feature-visual {
+      transform: scale(1);
+    }
+    
+    .feature-visual::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,107,26,0.08) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1) translate(-25%, -25%);
+        opacity: 0.5;
+      }
+      50% {
+        transform: scale(1.1) translate(-30%, -30%);
+        opacity: 0.8;
+      }
     }
     
     /* Footer */
@@ -422,5 +474,25 @@
   <footer>
     <p>© 2026 Systemify. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Scroll-triggered animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.feature, .product-card').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
