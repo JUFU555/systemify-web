@@ -327,29 +327,90 @@
       position: relative;
     }
     
-    /* Box Opening Animation */
+    /* Isometric 3D Box */
     .box-animation {
       position: relative;
       width: 200px;
-      height: 200px;
-      perspective: 1000px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .box-3d {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      transform-style: preserve-3d;
+      transform: rotateX(-20deg) rotateY(25deg);
+    }
+    
+    .box-face {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 2px solid rgba(0, 0, 0, 0.15);
+    }
+    
+    .box-front {
+      background: linear-gradient(135deg, var(--orange) 0%, #E65A0D 100%);
+      transform: translateZ(60px);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .box-back {
+      background: linear-gradient(135deg, #D55A0D 0%, #C04A0D 100%);
+      transform: translateZ(-60px) rotateY(180deg);
+    }
+    
+    .box-right {
+      background: linear-gradient(to bottom, #FF8542 0%, var(--orange) 100%);
+      width: 120px;
+      transform: rotateY(90deg) translateZ(60px);
+      box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .box-left {
+      background: linear-gradient(to bottom, #E65A0D 0%, #D55A0D 100%);
+      width: 120px;
+      transform: rotateY(-90deg) translateZ(60px);
+    }
+    
+    .box-top {
+      background: linear-gradient(135deg, #FFB380 0%, var(--orange) 100%);
+      transform: rotateX(90deg) translateZ(60px);
+      box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+    
+    .box-top::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .box-bottom {
+      background: #C04A0D;
+      transform: rotateX(-90deg) translateZ(60px);
     }
     
     .box-lid {
       position: absolute;
-      top: 20px;
-      left: 30px;
-      width: 140px;
-      height: 70px;
-      background: linear-gradient(135deg, #FFB380 0%, var(--orange) 60%, #E65A0D 100%);
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #FFB380 0%, var(--orange) 100%);
       border: 2px solid rgba(0, 0, 0, 0.15);
-      border-radius: 6px;
+      transform: rotateX(90deg) translateZ(60px);
+      transform-origin: top center;
       box-shadow: 
-        0 6px 24px rgba(255,107,26,0.3),
-        inset 0 3px 12px rgba(255, 255, 255, 0.3),
-        inset 0 -3px 12px rgba(0, 0, 0, 0.15);
-      transform-style: preserve-3d;
-      transform-origin: left center;
+        0 10px 30px rgba(255,107,26,0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
     }
     
     .box-lid::before {
@@ -358,139 +419,84 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 70px;
-      height: 10px;
+      width: 60%;
+      height: 12px;
       background: rgba(255, 255, 255, 0.5);
-      border-radius: 5px;
+      border-radius: 6px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
-    .box-lid::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 15px;
-      height: 100%;
-      background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
-      border-radius: 0 6px 6px 0;
-    }
-    
     .process-step.visible .box-lid {
-      animation: lidFlyOff 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
+      animation: isometricLidOpen 1.5s ease 0.5s both;
     }
     
-    @keyframes lidFlyOff {
+    @keyframes isometricLidOpen {
       0% {
-        transform: translateY(0) translateX(0) rotateZ(0deg) rotateY(0deg);
-        opacity: 1;
+        transform: rotateX(90deg) translateZ(60px) rotateX(0deg);
       }
-      30% {
-        transform: translateY(-15px) translateX(5px) rotateZ(-5deg) rotateY(10deg);
-      }
-      60% {
-        transform: translateY(-25px) translateX(60px) rotateZ(-25deg) rotateY(25deg);
-        opacity: 1;
+      50% {
+        transform: rotateX(90deg) translateZ(60px) rotateX(-100deg);
       }
       100% {
-        transform: translateY(-30px) translateX(90px) rotateZ(-35deg) rotateY(35deg);
-        opacity: 0.3;
+        transform: rotateX(90deg) translateZ(60px) rotateX(-120deg);
       }
     }
     
     .box-base {
       position: absolute;
-      bottom: 20px;
-      left: 30px;
-      width: 140px;
-      height: 120px;
-      background: linear-gradient(145deg, #FFB380 0%, var(--orange) 50%, #E65A0D 100%);
-      border: 2px solid rgba(0, 0, 0, 0.15);
-      border-radius: 6px;
-      box-shadow: 
-        0 12px 40px rgba(255,107,26,0.25),
-        inset 0 4px 16px rgba(255, 255, 255, 0.25),
-        inset 0 -4px 16px rgba(0, 0, 0, 0.2);
-      position: relative;
-    }
-    
-    .box-base::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 3px;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.1), transparent);
-    }
-    
-    .box-base::after {
-      content: '';
-      position: absolute;
-      top: 50%;
+      width: 120px;
+      height: 80px;
+      bottom: 0;
       left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2), transparent);
     }
     
-    .process-step.visible .box-base {
-      animation: boxSettle 0.6s ease 0.5s both;
-    }
-    
-    @keyframes boxSettle {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-4px);
-      }
-    }
-    
-    .sparkle {
+    .glow-dot {
       position: absolute;
-      font-size: 24px;
+      width: 8px;
+      height: 8px;
+      background: var(--orange);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--orange), 0 0 24px rgba(255,107,26,0.5);
       opacity: 0;
     }
     
-    .process-step.visible .sparkle {
-      animation: sparkleFloat 2s ease infinite;
+    .process-step.visible .glow-dot {
+      animation: dotFloat 2.5s ease infinite;
     }
     
-    .sparkle-1 {
-      top: 40px;
-      left: 30px;
-      animation-delay: 0.8s !important;
-    }
-    
-    .sparkle-2 {
-      top: 30px;
-      right: 30px;
+    .dot-1 {
+      bottom: 60px;
+      left: 50px;
       animation-delay: 1s !important;
     }
     
-    .sparkle-3 {
-      top: 50px;
+    .dot-2 {
+      bottom: 55px;
       left: 90px;
-      animation-delay: 1.2s !important;
+      animation-delay: 1.3s !important;
     }
     
-    @keyframes sparkleFloat {
-      0%, 100% {
+    .dot-3 {
+      bottom: 62px;
+      left: 120px;
+      animation-delay: 1.6s !important;
+    }
+    
+    @keyframes dotFloat {
+      0% {
         transform: translateY(0) scale(0);
         opacity: 0;
       }
-      20% {
-        transform: translateY(-10px) scale(1);
+      15% {
+        transform: translateY(-15px) scale(1);
         opacity: 1;
       }
-      80% {
-        transform: translateY(-40px) scale(1);
-        opacity: 0.8;
+      85% {
+        transform: translateY(-60px) scale(0.8);
+        opacity: 0.7;
       }
       100% {
-        transform: translateY(-50px) scale(0.5);
+        transform: translateY(-80px) scale(0);
         opacity: 0;
       }
     }
@@ -770,11 +776,18 @@
       </div>
       <div class="step-visual">
         <div class="box-animation">
-          <div class="box-lid"></div>
-          <div class="box-base"></div>
-          <div class="sparkle sparkle-1">✨</div>
-          <div class="sparkle sparkle-2">✨</div>
-          <div class="sparkle sparkle-3">✨</div>
+          <div class="box-3d">
+            <div class="box-face box-front"></div>
+            <div class="box-face box-back"></div>
+            <div class="box-face box-right"></div>
+            <div class="box-face box-left"></div>
+            <div class="box-face box-top"></div>
+            <div class="box-face box-bottom"></div>
+            <div class="box-lid"></div>
+          </div>
+          <div class="glow-dot dot-1"></div>
+          <div class="glow-dot dot-2"></div>
+          <div class="glow-dot dot-3"></div>
         </div>
       </div>
     </div>
