@@ -339,10 +339,27 @@
       top: 0;
       left: 20px;
       width: 140px;
-      height: 60px;
-      background: linear-gradient(135deg, var(--orange) 0%, #E65A0D 100%);
+      height: 70px;
+      background: linear-gradient(135deg, #FFB380 0%, var(--orange) 60%, #E65A0D 100%);
+      border: 2px solid rgba(0, 0, 0, 0.1);
       border-radius: 8px 8px 0 0;
-      box-shadow: 0 4px 20px rgba(255,107,26,0.3);
+      box-shadow: 
+        0 4px 20px rgba(255,107,26,0.3),
+        inset 0 2px 10px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .box-lid::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
     
     .process-step.visible .box-lid {
@@ -366,10 +383,35 @@
       bottom: 0;
       left: 20px;
       width: 140px;
-      height: 100px;
+      height: 110px;
       background: linear-gradient(to bottom, var(--orange-light) 0%, var(--orange) 100%);
+      border: 2px solid rgba(0, 0, 0, 0.1);
       border-radius: 0 0 8px 8px;
-      box-shadow: 0 8px 30px rgba(255,107,26,0.2);
+      box-shadow: 
+        0 8px 30px rgba(255,107,26,0.2),
+        inset 0 2px 15px rgba(255, 255, 255, 0.2),
+        inset 0 -3px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .box-base::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent);
+    }
+    
+    .box-base::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.15), transparent);
     }
     
     .sparkle {
@@ -440,25 +482,25 @@
     }
     
     .process-step.visible .skill-bubble {
-      animation: bubbleIn 0.8s ease both;
+      animation: bubbleIn 0.8s ease both, bubbleFloat 3s ease-in-out infinite;
     }
     
     .skill-1 {
       top: 20px;
       left: 30px;
-      animation-delay: 0.5s !important;
+      animation-delay: 0.5s, 1.3s !important;
     }
     
     .skill-2 {
       top: 100px;
       left: 80px;
-      animation-delay: 0.7s !important;
+      animation-delay: 0.7s, 1.7s !important;
     }
     
     .skill-3 {
       top: 170px;
       left: 10px;
-      animation-delay: 0.9s !important;
+      animation-delay: 0.9s, 2.1s !important;
     }
     
     @keyframes bubbleIn {
@@ -475,6 +517,15 @@
       }
     }
     
+    @keyframes bubbleFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+    
     /* Automation Animation */
     .automation-animation {
       position: relative;
@@ -484,13 +535,21 @@
     
     .gear {
       position: absolute;
-      font-size: 64px;
+      width: 70px;
+      height: 70px;
       opacity: 0;
     }
     
+    .gear svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--orange);
+      filter: drop-shadow(0 4px 12px rgba(255,107,26,0.3));
+    }
+    
     .process-step.visible .gear {
-      animation: gearSpin 3s linear infinite;
-      opacity: 0.9;
+      animation: gearSpin 4s linear infinite;
+      opacity: 1;
     }
     
     .gear-1 {
@@ -500,7 +559,7 @@
     }
     
     .gear-2 {
-      top: 80px;
+      top: 90px;
       right: 30px;
       animation-delay: 0.7s !important;
       animation-direction: reverse;
@@ -508,15 +567,16 @@
     
     @keyframes gearSpin {
       0% {
-        transform: rotate(0deg);
+        transform: rotate(0deg) scale(0.5);
         opacity: 0;
       }
       10% {
-        opacity: 0.9;
+        opacity: 1;
+        transform: rotate(36deg) scale(1);
       }
       100% {
-        transform: rotate(360deg);
-        opacity: 0.9;
+        transform: rotate(360deg) scale(1);
+        opacity: 1;
       }
     }
     
@@ -708,8 +768,16 @@
       </div>
       <div class="step-visual">
         <div class="automation-animation">
-          <div class="gear gear-1">⚙️</div>
-          <div class="gear gear-2">⚙️</div>
+          <div class="gear gear-1">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66z"/>
+            </svg>
+          </div>
+          <div class="gear gear-2">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66z"/>
+            </svg>
+          </div>
           <div class="pulse-ring"></div>
         </div>
       </div>
