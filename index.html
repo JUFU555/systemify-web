@@ -446,37 +446,6 @@
       }
     }
     
-    .box-top {
-      background: linear-gradient(135deg, #FFB380 0%, var(--orange) 100%);
-      transform: rotateX(90deg) translateZ(60px);
-      box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2);
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
-    
-    .box-top::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60%;
-      height: 12px;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    .process-step.visible .box-top {
-      animation: topFade 0.3s ease 0.5s both;
-    }
-    
-    @keyframes topFade {
-      to {
-        opacity: 0;
-      }
-    }
-    
     /* Box Interior */
     .box-interior {
       position: absolute;
@@ -985,7 +954,6 @@
             <div class="box-face box-back"></div>
             <div class="box-face box-right"></div>
             <div class="box-face box-left"></div>
-            <div class="box-face box-top"></div>
             <div class="box-interior"></div>
             <div class="box-face box-bottom"></div>
           </div>
