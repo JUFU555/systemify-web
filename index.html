@@ -400,54 +400,18 @@
       transform: rotateX(-90deg) translateZ(60px);
     }
     
-    .box-lid {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #FFB380 0%, var(--orange) 100%);
-      border: 2px solid rgba(0, 0, 0, 0.15);
-      transform: rotateX(90deg) translateZ(60px);
-      transform-origin: top center;
-      box-shadow: 
-        0 10px 30px rgba(255,107,26,0.3),
-        inset 0 0 20px rgba(255, 255, 255, 0.3);
+    
+    .process-step.visible .box-3d {
+      animation: boxFloat 3s ease-in-out infinite;
     }
     
-    .box-lid::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60%;
-      height: 12px;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    .process-step.visible .box-lid {
-      animation: isometricLidOpen 1.5s ease 0.5s both;
-    }
-    
-    @keyframes isometricLidOpen {
-      0% {
-        transform: rotateX(90deg) translateZ(60px) rotateX(0deg);
+    @keyframes boxFloat {
+      0%, 100% {
+        transform: rotateX(-20deg) rotateY(25deg) translateY(0);
       }
       50% {
-        transform: rotateX(90deg) translateZ(60px) rotateX(-100deg);
+        transform: rotateX(-20deg) rotateY(25deg) translateY(-8px);
       }
-      100% {
-        transform: rotateX(90deg) translateZ(60px) rotateX(-120deg);
-      }
-    }
-    
-    .box-base {
-      position: absolute;
-      width: 120px;
-      height: 80px;
-      bottom: 0;
-      left: 0;
     }
     
     .glow-dot {
@@ -783,7 +747,6 @@
             <div class="box-face box-left"></div>
             <div class="box-face box-top"></div>
             <div class="box-face box-bottom"></div>
-            <div class="box-lid"></div>
           </div>
           <div class="glow-dot dot-1"></div>
           <div class="glow-dot dot-2"></div>
