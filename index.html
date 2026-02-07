@@ -359,6 +359,32 @@
       transform-origin: bottom center;
     }
     
+    .box-front::after,
+    .box-back::after,
+    .box-right::after,
+    .box-left::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #FFD4B3 0%, #FFB380 100%);
+      opacity: 0;
+      backface-visibility: visible;
+      transform: rotateY(180deg);
+    }
+    
+    .process-step.visible .box-front::after,
+    .process-step.visible .box-back::after,
+    .process-step.visible .box-right::after,
+    .process-step.visible .box-left::after {
+      animation: showInside 1.2s ease 0.5s both;
+    }
+    
+    @keyframes showInside {
+      50%, 100% {
+        opacity: 0.9;
+      }
+    }
+    
     .box-back {
       background: linear-gradient(135deg, #D55A0D 0%, #C04A0D 100%);
       transform: translateZ(-60px) rotateY(180deg);
@@ -398,25 +424,25 @@
     
     @keyframes flapOpenFront {
       to {
-        transform: translateZ(60px) rotateX(90deg);
+        transform: translateZ(60px) rotateX(-120deg);
       }
     }
     
     @keyframes flapOpenBack {
       to {
-        transform: translateZ(-60px) rotateY(180deg) rotateX(90deg);
+        transform: translateZ(-60px) rotateY(180deg) rotateX(-120deg);
       }
     }
     
     @keyframes flapOpenRight {
       to {
-        transform: rotateY(90deg) translateZ(60px) rotateX(90deg);
+        transform: rotateY(90deg) translateZ(60px) rotateX(-120deg);
       }
     }
     
     @keyframes flapOpenLeft {
       to {
-        transform: rotateY(-90deg) translateZ(60px) rotateX(90deg);
+        transform: rotateY(-90deg) translateZ(60px) rotateX(-120deg);
       }
     }
     
@@ -962,17 +988,10 @@
             <div class="box-face box-top"></div>
             <div class="box-interior"></div>
             <div class="box-face box-bottom"></div>
-            <div class="box-lid"></div>
-            <div class="mac-device"></div>
           </div>
           <div class="glow-dot dot-1"></div>
           <div class="glow-dot dot-2"></div>
           <div class="glow-dot dot-3"></div>
-          <div class="wifi-signal">
-            <div class="wifi-ring wifi-ring-1"></div>
-            <div class="wifi-ring wifi-ring-2"></div>
-            <div class="wifi-ring wifi-ring-3"></div>
-          </div>
         </div>
       </div>
     </div>
