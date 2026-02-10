@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join the Waitlist - Systemify</title>
+  <meta name="description" content="Be first in line for your pre-configured AI assistant. Mac Mini + Systemify multi-agent system.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --orange: #FF6B1A;
+      --orange-glow: rgba(255, 107, 26, 0.15);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .back { color: #666; text-decoration: none; font-size: 14px; }
+    .back:hover { color: #999; }
+
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--orange-glow);
+      color: var(--orange);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 107, 26, 0.2);
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+
+    h1 span { color: var(--orange); }
+
+    .subtitle {
+      font-size: 18px;
+      color: #666;
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .input-row input {
+      flex: 1;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-row input:focus {
+      border-color: var(--orange);
+    }
+
+    .input-row input::placeholder {
+      color: #444;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #e65a0d;
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .success-msg .check {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .success-msg h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .success-msg p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .fine-print {
+      font-size: 12px;
+      color: #333;
+      margin-top: 16px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 60px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #555;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 700px;
+      margin-top: 80px;
+      padding: 0 24px;
+    }
+
+    .feature {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .feature-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 36px; }
+      .input-row { flex-direction: column; }
+      .stats { gap: 24px; }
+      .features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Systemify</a>
+  <a href="index.html" class="back">← Back</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">🚀 LAUNCHING Q1 2026</div>
+  
+  <h1>Your AI assistant.<br><span>Ready to ship.</span></h1>
+  
+  <p class="subtitle">Pre-configured Mac Mini with multi-agent AI system installed. Unbox, connect, automate. Join the waitlist to be first.</p>
+
+  <div class="form-container" id="formContainer">
+    <div class="input-row">
+      <input type="text" id="firstName" placeholder="First name" required />
+      <input type="text" id="lastName" placeholder="Last name" />
+    </div>
+    <div class="input-row">
+      <input type="email" id="email" placeholder="Email address" required />
+    </div>
+    <div class="input-row">
+      <input type="tel" id="phone" placeholder="WhatsApp number (optional)" />
+    </div>
+    <div class="input-row">
+      <select id="interest" style="flex:1;background:#111;border:1px solid #222;border-radius:12px;padding:16px 20px;color:#fff;font-size:16px;font-family:inherit;outline:none;-webkit-appearance:none;">
+        <option value="" disabled selected style="color:#444">What interests you most?</option>
+        <option value="personal">Personal AI Assistant</option>
+        <option value="business">Business Automation</option>
+        <option value="content">Content Creation</option>
+        <option value="dev">Developer Tools</option>
+        <option value="all">All of the above</option>
+      </select>
+    </div>
+    <button class="submit-btn" id="submitBtn" onclick="submitWaitlist()">Join the Waitlist →</button>
+    <p class="fine-print">No spam. We'll notify you when units are ready to ship.</p>
+  </div>
+
+  <div class="success-msg" id="successMsg">
+    <div class="check">✅</div>
+    <h3>You're on the list!</h3>
+    <p>We'll reach out when your AI assistant is ready to ship.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number" id="waitlistCount">47</div>
+      <div class="stat-label">On Waitlist</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">AI Uptime</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">&lt;5min</div>
+      <div class="stat-label">Setup Time</div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">📦</div>
+      <div class="feature-name">Plug & Play</div>
+      <div class="feature-desc">Arrives pre-configured. Connect to WiFi and you're live.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-name">Multi-Agent</div>
+      <div class="feature-desc">Multiple AI agents working in parallel on your tasks.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-name">Private & Local</div>
+      <div class="feature-desc">Your data stays on your hardware. No cloud dependency.</div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Systemify. All rights reserved.</footer>
+
+<script>
+// Simple waitlist storage (saves to localStorage + could POST to API)
+function submitWaitlist() {
+  const firstName = document.getElementById('firstName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  
+  if (!firstName || !email) {
+    alert('Please enter your name and email.');
+    return;
+  }
+
+  if (!email.includes('@')) {
+    alert('Please enter a valid email.');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Joining...';
+
+  const entry = {
+    firstName,
+    lastName: document.getElementById('lastName').value.trim(),
+    email,
+    phone: document.getElementById('phone').value.trim(),
+    interest: document.getElementById('interest').value,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Save locally
+  const waitlist = JSON.parse(localStorage.getItem('systemify-waitlist') || '[]');
+  waitlist.push(entry);
+  localStorage.setItem('systemify-waitlist', JSON.stringify(waitlist));
+
+  // TODO: POST to backend API / Notion / Google Sheets
+  // fetch('/api/waitlist', { method: 'POST', body: JSON.stringify(entry) });
+
+  setTimeout(() => {
+    document.getElementById('formContainer').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    
+    // Update counter
+    const count = parseInt(document.getElementById('waitlistCount').textContent) + 1;
+    document.getElementById('waitlistCount').textContent = count;
+  }, 800);
+}
+
+// Animate counter on load
+const counter = document.getElementById('waitlistCount');
+const target = 47;
+let current = 0;
+const interval = setInterval(() => {
+  current += Math.ceil((target - current) / 5);
+  if (current >= target) { current = target; clearInterval(interval); }
+  counter.textContent = current;
+}, 50);
+</script>
+</body>
+</html>
